@@ -1,0 +1,530 @@
+{
+  "matiere": "Histoire des faits économiques",
+  "semestre": "L1",
+  "chapitres": [
+    {
+      "id": "ch1",
+      "titre": "Le Néolithique, une révolution économique et sociale",
+      "resume": "Le Néolithique fait passer l'humanité de la prédation à la production. Le climat (Brasseul, oasis de Childe) pousse au changement, mais Sahlins, Braidwood et North y lisent aussi un choix culturel : propriété, stock et domination de la nature.",
+      "notions": [
+        {
+          "id": "ch1-n1",
+          "terme": "Néolithique",
+          "definition": "Âge de la pierre nouvelle : on polit la pierre au lieu de seulement la tailler, et l'on passe à l'agriculture, à l'élevage et à la sédentarité.",
+          "explication_simple": "Le mot désigne un outil, le cours désigne un régime économique. Sans champs, troupeaux et villages, la définition est incomplète.",
+          "exemple": "Vers −8000 au Proche-Orient, les galets taillés cèdent la place à la pierre polie, et les groupes sèment des céréales au lieu de seulement les cueillir.",
+          "piege": "Définir le Néolithique uniquement par la pierre polie, sans agriculture ni sédentarité.",
+          "liees": ["ch1-n2", "ch1-n4"],
+          "importance": 3,
+          "source": "cours"
+        },
+        {
+          "id": "ch1-n2",
+          "terme": "Paléolithique et Mésolithique",
+          "definition": "Le Paléolithique est l'âge de la pierre ancienne, nomade, fondé sur la chasse et la cueillette. Le Mésolithique est la période du milieu, liée au réchauffement, avec des microlithes, l'arc et le filet.",
+          "explication_simple": "Ces deux âges servent de contraste. On y consomme tout de suite, on n'accumule pas.",
+          "exemple": "Le cours situe le Paléolithique environ de −150 000 à −12 000, et le Mésolithique de −12 000 à −8000, avec des décalages selon les régions.",
+          "piege": "Méso signifie milieu, pas micro. Les microlithes sont les petits outils. Ne pas développer Homo habilis et Homo erectus : la bipédie est bien antérieure, et ce n'est pas le sujet.",
+          "liees": ["ch1-n1", "ch1-n4"],
+          "importance": 2,
+          "source": "cours"
+        },
+        {
+          "id": "ch1-n3",
+          "terme": "Météo et climat",
+          "definition": "La météo se prévoit à court terme, de l'ordre de 72 heures. Le climat est une orientation longue, capable de transformer la faune et la flore.",
+          "explication_simple": "Le Néolithique répond à un changement de climat, pas à une mauvaise semaine.",
+          "exemple": "Une région qui passe de −20 °C à +5 °C en dix mille ans change de monde vivant, pas seulement de temps qu'il fait.",
+          "piege": "Appeler « météo » l'assèchement post-glaciaire.",
+          "liees": ["ch1-n5"],
+          "importance": 2,
+          "source": "cours"
+        },
+        {
+          "id": "ch1-n4",
+          "terme": "Économie de subsistance et économie de production",
+          "definition": "La subsistance tue ou cueille et consomme aussitôt, sans stock. La production sème, élève, conserve et accumule.",
+          "explication_simple": "Le stock est le critère. Sans grenier ni troupeau reproducteur, il n'y a pas de richesse qui demeure.",
+          "exemple": "Le chasseur mange la bête le jour même. Le paysan remplit un silo et garde des bêtes pour qu'elles se reproduisent : plus le stock est gros, plus il est riche.",
+          "piege": "Présenter l'agriculture comme plus facile. Sahlins dit l'inverse.",
+          "liees": ["ch1-n8", "ch1-n11"],
+          "importance": 3,
+          "source": "cours"
+        },
+        {
+          "id": "ch1-n5",
+          "terme": "Thèse climatique de Brasseul",
+          "definition": "À la fin des glaciations, les plateaux et les plaines de l'Inde à la Méditerranée, avec un épicentre au Kurdistan et en Irak, deviennent plus secs. Le gibier se raréfie et les chasseurs doivent changer de mode de vie.",
+          "explication_simple": "Le Néolithique est d'abord, dans cette lecture, une échappatoire devant une nature moins généreuse.",
+          "exemple": "Le cours date cet assèchement d'environ 12 000 ans : moins de ressources, chasse plus longue, groupes affaiblis par le manque et la maladie.",
+          "piege": "Faire de la hausse démographique la cause initiale. Dans le cours, nourrir plus de monde est un effet, compris après coup.",
+          "liees": ["ch1-n3", "ch1-n6", "ch1-n7"],
+          "importance": 3,
+          "source": "cours"
+        },
+        {
+          "id": "ch1-n6",
+          "terme": "Théorie des oasis",
+          "definition": "Gordon Childe, d'après Raphael Pumpelly : le réchauffement assèche l'Asie, hommes, bêtes et plantes se concentrent dans les zones encore humides, et cette promiscuité permet la domestication.",
+          "explication_simple": "On domestique parce qu'on est forcé de vivre à côté de l'animal, pas parce qu'on a d'abord eu l'idée abstraite de l'élever.",
+          "exemple": "Le cours place cette domestication entre 8000 et 9000 avant notre ère. Le chien, vers −12 000, est un cas à part : compagnon de chasse, enterré avec des humains. Le chat arrive avec les greniers et les rongeurs.",
+          "piege": "Présenter la théorie des oasis comme abandonnée par le cours. Elle est la version classique de la contrainte. Dire qu'elle a été discutée ensuite, pas qu'elle est « fausse » dans la bouche du professeur.",
+          "liees": ["ch1-n5", "ch1-n9"],
+          "importance": 3,
+          "source": "cours"
+        },
+        {
+          "id": "ch1-n7",
+          "terme": "Rôle des femmes dans le passage à l'agriculture",
+          "definition": "Le cours attribue aux femmes, moins prises par la chasse et chargées de nourrir les enfants, le passage des céréales sauvages, dont le blé, à une alimentation cultivée.",
+          "explication_simple": "La division du travail paléolithique (hommes à la chasse, femmes et enfants restés en arrière) se défait quand les troupeaux vivent près du camp.",
+          "exemple": "Brasseul reprend la même idée : les femmes cueillaient déjà, ce sont elles qui essaient de planter quand le gibier manque.",
+          "piege": "En faire une loi démontrée plutôt que la thèse du cours. La formuler comme l'hypothèse enseignée.",
+          "liees": ["ch1-n5", "ch1-n11"],
+          "importance": 2,
+          "source": "cours"
+        },
+        {
+          "id": "ch1-n8",
+          "terme": "Paradoxe de Sahlins",
+          "definition": "Marshall Sahlins montre que les chasseurs-cueilleurs travaillent moins longtemps pour se nourrir que les paysans. L'agriculture n'est donc pas adoptée parce qu'elle est plus légère.",
+          "explication_simple": "Le paradoxe oblige à chercher une contrainte ou un choix, pas un confort.",
+          "exemple": "Construire des enclos, garder le bétail et moissonner prend plus de temps que tuer une bête et la manger le jour même.",
+          "piege": "Citer Sahlins comme partisan de l'agriculture. Il sert à montrer que le choix est énigmatique.",
+          "liees": ["ch1-n4", "ch1-n9"],
+          "importance": 3,
+          "source": "cours"
+        },
+        {
+          "id": "ch1-n9",
+          "terme": "Thèse culturelle de Braidwood",
+          "definition": "Robert Braidwood lit le Néolithique comme une mutation intellectuelle : l'homme veut changer de vie, sélectionner les espèces et façonner l'espace, il ne fait pas que subir le climat.",
+          "explication_simple": "S'adapter ou disparaître ne suffit plus. Le cours ajoute une volonté.",
+          "exemple": "Le cochon obtenu à partir du sanglier, les champs et les villages : l'homme impose un milieu à la nature au lieu de seulement le parcourir.",
+          "piege": "Opposer Braidwood à Brasseul comme si le cours éliminait la contrainte. La copie forte tient les deux.",
+          "liees": ["ch1-n5", "ch1-n8", "ch1-n10"],
+          "importance": 3,
+          "source": "cours"
+        },
+        {
+          "id": "ch1-n10",
+          "terme": "Première révolution économique selon North",
+          "definition": "Douglass North, dans Structure and Change in Economic History (1981), fait du Néolithique la première révolution économique : agriculture et propriété privée, bien avant l'industrie.",
+          "explication_simple": "Ce n'est plus un chapitre de préhistoire à côté de l'économie. C'est le premier changement de régime.",
+          "exemple": "En Mésopotamie, vers −9000 / −8000 dans le cours, chaque paysan a son champ et reste dessus, parce qu'un champ quitté est un champ perdu.",
+          "piege": "Réserver le mot « révolution économique » à 1760. Le cours l'emploie déjà pour le Néolithique, la révolution industrielle venant ensuite.",
+          "liees": ["ch1-n9", "ch1-n11"],
+          "importance": 3,
+          "source": "cours"
+        },
+        {
+          "id": "ch1-n11",
+          "terme": "Propriété, famille et stockage",
+          "definition": "La sédentarité fait apparaître le stock (silos, greniers, troupeaux), la propriété du champ et une famille liée à la maison et à l'héritage.",
+          "explication_simple": "On reste parce qu'il y a quelque chose à garder. La maison se cloisonne, le travail se divise entre paysans et artisans.",
+          "exemple": "Le grenier et la pièce séparée sont les signes matériels du cours : une richesse qui a un lieu, une vie domestique qui n'est plus le camp.",
+          "piege": "Écrire que la famille n'existait pas du tout. Le cours dit qu'elle n'existait pas comme unité liée à la terre et à la transmission.",
+          "liees": ["ch1-n4", "ch1-n10", "ch1-n12"],
+          "importance": 3,
+          "source": "cours"
+        },
+        {
+          "id": "ch1-n12",
+          "terme": "Valeur, troc et pré-monnaie",
+          "definition": "La spécialisation oblige à comparer les biens. Le troc fait naître la notion de valeur, puis, dans le vocabulaire du cours, une pré-monnaie.",
+          "explication_simple": "Dès qu'on échange des objets différents, il faut une échelle : ceci vaut cela.",
+          "exemple": "Combien de poteries contre un mouton ? La question suffit à montrer la naissance de la valeur.",
+          "piege": "Dater les pièces d'or, d'argent ou de bronze du Néolithique. La monnaie frappée apparaît en Lydie au VIIe siècle avant notre ère. En copie, s'arrêter au troc et à la valeur.",
+          "liees": ["ch1-n11", "ch1-n13"],
+          "importance": 2,
+          "source": "cours"
+        },
+        {
+          "id": "ch1-n13",
+          "terme": "Hiérarchie, violence et défense du stock",
+          "definition": "Le stock crée de l'inégalité et quelque chose à défendre. Le cours lie à ce moment la hiérarchie, le profit, les traces de guerre et le passage du village à la ville.",
+          "explication_simple": "Qui possède le grain n'est plus l'égal de qui n'a que ses bras. Ce qui se vole se protège.",
+          "exemple": "Pointes de flèches et squelettes blessés par des armes sont les preuves archéologiques que le cours retient.",
+          "piege": "Faire naître en −8000 les armées permanentes et les villes-États. La révolution urbaine de Childe, avec cités et écriture, se place au IVe millénaire. Présenter une chaîne, pas un seul jour.",
+          "liees": ["ch1-n11", "ch1-n12"],
+          "importance": 2,
+          "source": "cours"
+        }
+      ],
+      "exercices_types": [
+        {
+          "id": "ex-ch1-diss",
+          "intitule": "Dissertation : Le Néolithique, une révolution économique et sociale (ou : Pourquoi cela s'est-il passé ?)",
+          "donnees": {
+            "sujet": "Le Néolithique, une révolution économique et sociale",
+            "problematique": "Le Néolithique est-il une échappatoire subie face au climat, ou une révolution voulue qui fait passer l'humanité de la subsistance à la production ?"
+          },
+          "etapes": [
+            "Accroche sur la pierre polie, puis définition : agriculture, élevage, sédentarité.",
+            "Annoncer les deux lectures, contrainte et choix, sans en éliminer une.",
+            "I. Brasseul, climat contre météo, raréfaction, théorie des oasis, femmes et céréales.",
+            "II. Sahlins (c'est plus de travail), Braidwood, North 1981, sélection du cochon, champs.",
+            "III. Stock, propriété, famille, division du travail, valeur. Sans dater la monnaie frappée ni les villes-États de −8000.",
+            "Conclure : subi dans ses causes, voulu dans ses formes, premier changement de régime économique."
+          ],
+          "resultat": "Copie qui répond aux deux intitulés du thème et qui ne transforme pas la pré-monnaie en pièces lydiennes.",
+          "notions_mobilisees": ["ch1-n1", "ch1-n4", "ch1-n5", "ch1-n6", "ch1-n8", "ch1-n9", "ch1-n10", "ch1-n11", "ch1-n12"]
+        }
+      ]
+    },
+    {
+      "id": "ch2",
+      "titre": "Comment une épidémie peut mettre à mal une économie",
+      "resume": "La peste de 1347 s'inscrit dans une crise générale du XIVe siècle. Elle casse la production et l'impôt, mais elle renchérit le travail, réduit l'écart de richesse et pousse les rois à réguler salaires et prix.",
+      "notions": [
+        {
+          "id": "ch2-n1",
+          "terme": "Crise générale et séculaire",
+          "definition": "Le XIVe siècle n'est pas une seule mauvaise année. C'est une crise longue, qui se décline en crises particulières : 1315-1317, 1347, 1370-1380, plus la guerre.",
+          "explication_simple": "Dire « la peste » sans le siècle, c'est rater le sujet. La faim et la guerre sont déjà là.",
+          "exemple": "La prière du moine copiste, « De la faim, de la peste, de la guerre, libère-nous, Seigneur », résume les trois fléaux que le cours tient ensemble.",
+          "piege": "Fondre 1315, 1347 et 1370 en une seule date.",
+          "liees": ["ch2-n2", "ch2-n3"],
+          "importance": 3,
+          "source": "cours"
+        },
+        {
+          "id": "ch2-n2",
+          "terme": "Crise alimentaire de 1315-1317",
+          "definition": "Crise de récolte limitée à l'Europe du Nord, due à des intempéries, avant la peste noire. Les corps affaiblis ouvrent la porte aux épidémies.",
+          "explication_simple": "C'est la première pointe du siècle, pas encore le bacille de 1347.",
+          "exemple": "Gilles Le Muisit, abbé de Saint-Martin de Tournai, décrit intempéries et famine. À Ypres, en 1316, environ un dixième de la population meurt en quelques mois.",
+          "piege": "Étendre cette famine à toute l'Europe du Sud. Le cours la limite au Nord.",
+          "liees": ["ch2-n1"],
+          "importance": 2,
+          "source": "cours"
+        },
+        {
+          "id": "ch2-n3",
+          "terme": "Peste noire et mortalité",
+          "definition": "Grande Peste à partir de 1347. Bubons, mort en environ trois jours, survie inférieure à 0,5 % une fois le mal déclaré. Froissart parle du tiers de l'Europe. Quatorze retours jusqu'en 1415.",
+          "explication_simple": "Le choc démographique est le moteur de tous les effets économiques qui suivent.",
+          "exemple": "Boccace, dans le Décaméron, décrit les bubons à l'aine et à l'aisselle. Hambourg est cité pour une perte de l'ordre de 80 %, Paris pour environ la moitié.",
+          "piege": "Écrire 0,05 % de survie : c'est une virgule mal entendue. Retenir moins de 0,5 %.",
+          "liees": ["ch2-n1", "ch2-n6"],
+          "importance": 3,
+          "source": "cours"
+        },
+        {
+          "id": "ch2-n4",
+          "terme": "Haine de classe, pogroms et révoltes",
+          "definition": "La peste nourrit la recherche de coupables : haine entre riches et pauvres, accusations contre les juifs, pogroms. Elle s'ajoute aux révoltes de 1358 et à celles des années 1370-1380.",
+          "explication_simple": "Le traumatisme n'est pas seulement le nombre de morts. C'est la chasse au responsable.",
+          "exemple": "Jacquerie de 1358, brève, autour de Paris : plusieurs centaines de morts du côté des seigneurs, environ 20 000 dans la répression. Au même moment, Étienne Marcel à Paris.",
+          "piege": "Écrire que la peste « cause » mécaniquement chaque révolte. Le cours dit qu'elle s'ajoute à la faim et à la guerre.",
+          "liees": ["ch2-n1", "ch2-n3"],
+          "importance": 2,
+          "source": "cours"
+        },
+        {
+          "id": "ch2-n5",
+          "terme": "Caffa ou Tana",
+          "definition": "Le récit de Caffa (1346, Djanibeg, cadavres catapultés, navires génois et vénitiens) repose sur Gabriele de' Mussi, source unique, indirecte et tardive. L'hypothèse alternative fait entrer la peste par le commerce à Tana, aujourd'hui Azov, dès 1345.",
+          "explication_simple": "Accuser Caffa, c'est accuser la guerre et l'étranger. Admettre Tana, c'est admettre que les échanges de temps de paix transportent le fléau.",
+          "exemple": "Les puces quittent le corps dès la mort : des cadavres catapultés ne portent plus le vecteur. L'argument biologique du cours suffit à ne pas réciter Caffa comme un fait.",
+          "piege": "Raconter le catapultage comme un événement certain. Le cours passe son temps à le démonter.",
+          "liees": ["ch2-n3", "ch2-n6"],
+          "importance": 3,
+          "source": "cours"
+        },
+        {
+          "id": "ch2-n6",
+          "terme": "Désastre économique immédiat",
+          "definition": "À court terme, la peste casse la production et la demande, augmente la monnaie par survivant, fait baisser les rentes foncières et rétrécit l'impôt.",
+          "explication_simple": "Moins de bras dans les champs, moins de bouches qui achètent, moins de contribuables, des terres sans locataire.",
+          "exemple": "Le cours retient pour l'Angleterre 3,8 millions d'habitants avant la peste et 1,7 million de morts, donc un trou fiscal qui pousse à chercher des amendes.",
+          "piege": "Attribuer une citation mot à mot à « R. Beard » ou « R. Brard ». Le nom entendu correspond vraisemblablement à Robert Braid. Apprendre les cinq effets, ne pas inventer le livre.",
+          "liees": ["ch2-n3", "ch2-n9"],
+          "importance": 3,
+          "source": "cours"
+        },
+        {
+          "id": "ch2-n7",
+          "terme": "Retournement de l'ordre social",
+          "definition": "La rareté de la main-d'œuvre permet aux survivants des métiers de vivre au-dessus de ce que les élites jugent acceptable : salaires doubles ou triples, viande fraîche, conditions dictées par l'ouvrier.",
+          "explication_simple": "Moins de concurrence entre travailleurs, plus de pouvoir de négociation. Le maître paie le prix fort pour finir le chantier.",
+          "exemple": "Formule du cours : l'ouvrier réclame deux fois plus pour travailler trois fois moins, et menace de partir ailleurs. Jean II constate qu'on peut vivre en ne travaillant que deux jours par semaine.",
+          "piege": "Croire que la hausse des prix du pain appauvrit forcément l'ouvrier. Le cours dit que son salaire a assez monté pour qu'il achète quand même.",
+          "liees": ["ch2-n8", "ch2-n9", "ch2-n11"],
+          "importance": 3,
+          "source": "cours"
+        },
+        {
+          "id": "ch2-n8",
+          "terme": "Moralistes du salaire",
+          "definition": "Langland, Gower et le chanoine de Leicester décrivent comme un scandale le nouveau niveau de vie ouvrier : viande fraîche, vin, lait, fromage, refus d'obéir.",
+          "explication_simple": "Ces textes ne mesurent pas le salaire. Ils disent l'inversion des valeurs aux yeux des élites.",
+          "exemple": "William Langland, Pierre le laboureur : on lâche le lard pour la viande fraîche. John Gower : les classes laborieuses exigent pour leur ventre ce qu'exige un seigneur, et « les bons vieux temps sont anéantis ».",
+          "piege": "Écrire « Peine le laboureur » ou « Gowen ». Leicester désigne Henry Knighton, chanoine augustinien. « Rochester » reste, dans le cours, un chroniqueur dont l'identité n'est pas sûre.",
+          "liees": ["ch2-n7"],
+          "importance": 2,
+          "source": "cours"
+        },
+        {
+          "id": "ch2-n9",
+          "terme": "Plafonnement des salaires et des prix",
+          "definition": "Après la peste, les autorités fixent salaires et prix au niveau d'avant le choc, obligent à accepter le travail et limitent la mobilité.",
+          "explication_simple": "Le pouvoir politique entre dans le marché du travail pour sauver l'ordre social, pas seulement pour « aider l'économie ».",
+          "exemple": "Édouard III en juin 1349 (gages de 1346), statut anglais de 1351, Statut de Cambridge en 1388. Raymond d'Agoult, sénéchal de Provence, en 1348, bloque le prix de 16 types de chaussures, 14 vêtements, 9 volailles et 15 coupes de viande, et punit de la main coupée la négociation collective. Jean II : ordonnance que le cours date de 1354.",
+          "piege": "Dire que ces lois ont réussi. Le cours dit qu'elles sont contournées. Ne pas se battre sur 1351 : les historiens datent souvent l'ordonnance parisienne du 30 janvier 1351, le cours dit 1354.",
+          "liees": ["ch2-n6", "ch2-n7", "ch2-n10"],
+          "importance": 3,
+          "source": "cours"
+        },
+        {
+          "id": "ch2-n10",
+          "terme": "Contournement par le paiement en nature",
+          "definition": "Le salaire légal reste celui d'avant la peste, mais l'employeur ajoute du blé ou une part de récolte. L'affichage respecte la loi, le revenu réel non.",
+          "explication_simple": "C'est la preuve, dans le cours, que l'ordonnance ne ramène pas l'ancien monde.",
+          "exemple": "Le moissonneur de Knighton demande à être payé en argent ou en nature. En Provence, le blocage des prix laisse la même porte ouverte.",
+          "piege": "Oublier la nature et conclure que le roi a gelé le niveau de vie.",
+          "liees": ["ch2-n7", "ch2-n9"],
+          "importance": 2,
+          "source": "cours"
+        },
+        {
+          "id": "ch2-n11",
+          "terme": "Nivellement des fortunes",
+          "definition": "Walter Scheidel et Guido Alfani : les mortalités de masse réduisent la concentration de la richesse. En Italie, la part des 10 % les plus riches passe de 65 % à 50 % vers 1350, et ce niveau dure environ deux siècles.",
+          "explication_simple": "La peste ne crée pas une société d'égaux. Elle réduit un écart, et les rois jugent cette réduction scandaleuse.",
+          "exemple": "Décret florentin du 9 octobre 1348 : beaucoup de citoyens sont devenus pauvres, certains pauvres sont devenus riches. Des femmes reprennent aussi l'activité du mari mort.",
+          "piege": "Écrire que les inégalités disparaissent. 50 %, ce n'est pas un partage égal. La concentration remonte du XVIe au XVIIIe siècle.",
+          "liees": ["ch2-n7", "ch2-n12"],
+          "importance": 3,
+          "source": "cours"
+        },
+        {
+          "id": "ch2-n12",
+          "terme": "Rebond et régulation politique",
+          "definition": "Catastrophe de court terme, la peste est aussi le moment où le pouvoir prend l'habitude de réguler l'économie. Il faut plus de deux siècles et demi pour retrouver la population d'avant.",
+          "explication_simple": "La conclusion du cours refuse le « désastre » seul. Le choc transforme la fin du Moyen Âge.",
+          "exemple": "Les plafonds échouent en partie, mais ils disent une nouveauté : le roi fixe le prix du travail. La population, elle, met plus de 250 ans à se refaire.",
+          "piege": "Finir sur le deuil sans le rebond, ou sur le rebond sans le trou démographique.",
+          "liees": ["ch2-n6", "ch2-n9", "ch2-n11"],
+          "importance": 3,
+          "source": "cours"
+        }
+      ],
+      "exercices_types": [
+        {
+          "id": "ex-ch2-diss",
+          "intitule": "Dissertation : Comment une épidémie peut mettre à mal une économie ?",
+          "donnees": {
+            "sujet": "Comment une épidémie peut mettre à mal une économie ?",
+            "problematique": "La peste est-elle seulement un désastre de court terme, ou un choc qui redistribue, force le pouvoir à réguler et prépare un rebond ?"
+          },
+          "etapes": [
+            "Accroche : la prière du moine, faim, peste, guerre.",
+            "I. Trois pointes (1315, 1347, 1370), Froissart, villes, Jacquerie.",
+            "II. Caffa démonté, Tana et le commerce, puis les cinq effets immédiats (production, demande, monnaie par tête, rentes, impôt).",
+            "III. Salaires et moralistes, ordonnances, paiement en nature, Scheidel et Alfani (65 % à 50 %).",
+            "Conclure en deux temps : catastrophe démographique de plus de deux siècles et demi, et transformation du rôle politique."
+          ],
+          "resultat": "Copie qui ne répond pas seulement « oui, c'est un désastre » et qui ne raconte pas Caffa comme un fait sûr.",
+          "notions_mobilisees": ["ch2-n1", "ch2-n3", "ch2-n5", "ch2-n6", "ch2-n7", "ch2-n9", "ch2-n11", "ch2-n12"]
+        }
+      ]
+    },
+    {
+      "id": "ch3",
+      "titre": "La population française sous l'Ancien Régime",
+      "resume": "Du XVIe au XVIIIe siècle, la population française augmente lentement, de 15-18 à environ 22 millions, parce que les crises la cassent. Elle est jeune, rurale à 80 %, mariée tard, et la mort des enfants règle le nombre des adultes.",
+      "notions": [
+        {
+          "id": "ch3-n1",
+          "terme": "Niveaux de population, 1500-1740",
+          "definition": "Vers 1500, 15 à 18 millions d'habitants ; vers 1600, 16 à 20 ; vers 1700, environ 21 ; vers 1740, environ 22. On compte les feux et l'on multiplie par environ quatre personnes.",
+          "explication_simple": "La fourchette large vient de la méthode, pas d'un mystère. La hausse est réelle et modeste.",
+          "exemple": "Un feu, c'est une maison d'où sort de la fumée. Quatre personnes par feu donnent l'ordre de grandeur du royaume.",
+          "formule": "habitants ≈ nombre de feux × 4",
+          "variables": {
+            "feux": "Maisons occupées, repérées par la fumée",
+            "4": "Coefficient moyen de personnes par feu retenu par le cours"
+          },
+          "piege": "Remplacer en copie les 22 millions de 1740 par 24,6. Ce dernier chiffre est la reconstitution de l'INED sur le territoire actuel. Dire « le cours retient environ 22 millions ».",
+          "liees": ["ch3-n2", "ch3-n6"],
+          "importance": 3,
+          "source": "cours"
+        },
+        {
+          "id": "ch3-n2",
+          "terme": "Croissance heurtée et impossibilité de prévoir",
+          "definition": "La population augmente sur le long terme, mais peut perdre deux à trois millions de personnes en trois ou quatre ans. On ne se projette pas.",
+          "explication_simple": "Lente ne veut pas dire immobile. Cassée ne veut pas dire stagnante.",
+          "exemple": "Le cours oppose un ministère actuel, capable de fermer des classes parce qu'il prévoit 1,5 million d'élèves en moins, à un royaume où l'on ne sait pas si l'on sera vivant dans huit jours.",
+          "piege": "Conclure à la stagnation. La première phrase imposée par le cours est d'abandonner cette idée.",
+          "liees": ["ch3-n1", "ch3-n12"],
+          "importance": 3,
+          "source": "cours"
+        },
+        {
+          "id": "ch3-n3",
+          "terme": "Densités et monde rural",
+          "definition": "Autour de 1700, plus de 80 à 90 hab/km² près de Lille, Amiens, Rouen, Alençon, Caen et Paris ; moins de 40 en Sologne, Alsace, Provence, Alpes et Poitou ; 40 à 60 ailleurs. 80 % de la population est rurale.",
+          "explication_simple": "Le royaume n'a pas une densité. Il a des raisons locales : mer, moustiques, frontière, marais, étangs.",
+          "exemple": "Sologne, environ 1 500 étangs. Paris, 530 000 habitants. Vingt villes seulement dépassent 30 000. La France n'est urbaine à 50 % que vers 1938, avec environ un siècle et demi de décalage sur l'Angleterre.",
+          "piege": "Citer les villes sans les 80 % de ruraux. Le contraste est le sujet.",
+          "liees": ["ch3-n4", "ch3-n6"],
+          "importance": 3,
+          "source": "cours"
+        },
+        {
+          "id": "ch3-n4",
+          "terme": "Migrations d'Ancien Régime",
+          "definition": "Migrations définitives vers les villes, saisonnières vers les ports, permanentes et mal vues (mendiants, colporteurs, déserteurs), de formation (compagnons du devoir) et conjoncturelles (guerre, religion).",
+          "explication_simple": "Le village n'est pas fermé. Une partie du sujet d'examen peut porter seulement là-dessus.",
+          "exemple": "Les domestiques finistériens sont recherchés à Paris parce qu'ils parlent breton et ne comprennent pas la conversation française. Les dragonnades déplacent ou chassent pour motif religieux.",
+          "piege": "Réduire la migration à l'exode rural du XIXe siècle. Le cours la décrit dès l'Ancien Régime.",
+          "liees": ["ch3-n3", "ch3-n9"],
+          "importance": 2,
+          "source": "cours"
+        },
+        {
+          "id": "ch3-n5",
+          "terme": "Structure par âge et par sexe",
+          "definition": "En 1740, environ 40 % de moins de 20 ans, 50 % d'adultes de 20 à 60 ans, 9 % de 60 ans et plus. Un peu plus de garçons à la naissance, plus de femmes après 50 ans.",
+          "explication_simple": "C'est une population jeune. Les vieux sont une petite minorité, comme dans un pays pauvre d'aujourd'hui, pas comme dans la France actuelle.",
+          "exemple": "Environ 511 garçons pour 500 filles à la naissance. La surmortalité des garçons entre 0 et 1 an rééquilibre. Après 50 ans, les femmes dominent, les hommes mourant plutôt d'accidents, les femmes en couches plus tôt.",
+          "piege": "Dire que l'on mourait à 25 ou 40 ans comme si personne ne dépassait cet âge. Louis XIV meurt à 76 ans, Voltaire à 84 : ce sont des exceptions que le cours cite pour qu'on ne les prenne pas pour la règle.",
+          "liees": ["ch3-n11", "ch3-n13"],
+          "importance": 3,
+          "source": "cours"
+        },
+        {
+          "id": "ch3-n6",
+          "terme": "Ménage de 4,5 personnes et les trois idées à abandonner",
+          "definition": "Le ménage moyen compte environ 4,5 personnes. Il est complexe (deuils, remariages, neveux) mais pas nombreux. Le célibat urbain est massif.",
+          "explication_simple": "Trois phrases de conclusion : pas de stagnation, pas de maisonnée géante, pas de mariage universel.",
+          "exemple": "Le cours cite Rouen : 35 % des ménages y sont des ménages de célibataires. La famille conjugale, ce sont les parents et les enfants mineurs, avec des familles élargies plutôt dans le sud.",
+          "piege": "Transformer les 35 % de Rouen en moyenne du royaume. C'est un exemple urbain du cours.",
+          "liees": ["ch3-n1", "ch3-n7"],
+          "importance": 3,
+          "source": "cours"
+        },
+        {
+          "id": "ch3-n7",
+          "terme": "Mariage tardif et frein malthusien",
+          "definition": "On se marie tard, souvent autour de 25 ans et au-delà. Malthus fournit au cours l'idée qu'il ne faut pas avoir d'enfants que l'on ne peut pas nourrir : reculer le mariage limite la fécondité.",
+          "explication_simple": "Le mariage est déjà une politique démographique. Moins d'années entre les noces et la ménopause, moins d'enfants.",
+          "exemple": "Fin XVIIe : environ 27-28 ans pour les garçons, 25-26 ans pour les filles des villes. Ménopause vers 40 ans. Allaitement d'environ deux ans. Le cours compte environ sept naissances en quinze ans. Célibat définitif : 7 % vers 1660-1664, environ 10 % à la veille de la Révolution.",
+          "piege": "Écrire « Mastus ». Le nom est Malthus. Hajnal est un cadrage postérieur : ne le citer que si on le nomme comme tel.",
+          "liees": ["ch3-n6", "ch3-n8", "ch3-n10"],
+          "importance": 3,
+          "source": "cours"
+        },
+        {
+          "id": "ch3-n8",
+          "terme": "Terre, héritage et cadets",
+          "definition": "Dans la France rurale, on se marie quand on peut s'installer, le plus souvent à la mort du père. Le cadet reste célibataire sur l'exploitation, entre dans les ordres ou dans l'armée.",
+          "explication_simple": "Pas de terre, pas de mariage, pas d'enfants. L'économie commande la nuptialité.",
+          "exemple": "Formule d'Alain Bideau retenue par le cours : seuls ceux qui peuvent s'installer, le plus souvent à la mort du père, accèdent au mariage.",
+          "piege": "Oublier les trois issues du cadet et parler seulement de l'aîné.",
+          "liees": ["ch3-n7", "ch3-n9"],
+          "importance": 3,
+          "source": "cours"
+        },
+        {
+          "id": "ch3-n9",
+          "terme": "Endogamie, homogamie et hypergamie",
+          "definition": "Endogamie : on se marie dans la paroisse, à 1,5 ou 2 km. Homogamie : même condition sociale. Hypergamie : montée par le mariage, servante épousée par le maître, ou fille de bourgeois épousée par un noble.",
+          "explication_simple": "Le choix du conjoint est surveillé. La paroisse de l'épouse est le lieu où les secrets se disent.",
+          "exemple": "Entre 1740 et 1789, 68 % des mariages unissent deux habitants de la même paroisse. Au XVIIe siècle, 65 % des mariages ont lieu le lundi. L'Église interdit les cousins germains (quatrième degré), l'Avent et le Carême.",
+          "piege": "Réciter les anecdotes génétiques du Finistère et de Crozon comme des preuves médicales. Un exemple d'endogamie géographique suffit.",
+          "liees": ["ch3-n7", "ch3-n8"],
+          "importance": 2,
+          "source": "cours"
+        },
+        {
+          "id": "ch3-n10",
+          "terme": "Natalité et obstacles à la fécondité",
+          "definition": "La fécondité est forte mais freinée par l'allaitement, la stérilité, les infections, la mort du conjoint, le coït interrompu et la brièveté des unions, environ quinze ans.",
+          "explication_simple": "Beaucoup de naissances ne veut pas dire beaucoup d'adultes. Les obstacles sont dans le corps et dans le calendrier du couple.",
+          "exemple": "Les trois quarts des femmes, dans le cours, ont une aménorrhée d'environ deux ans pendant l'allaitement. La femme du peuple se relève le lendemain ; la noble garde le lit et envoie l'enfant en nourrice.",
+          "piege": "Écrire 0,01 % de naissances illégitimes. L'INED donne environ 1 % en 1740-1749 et 2 % vers 1780. Le cours a raison sur le contraste : bas dans les campagnes, plus haut en ville (un ordre de 12 % est cité, gonflé par l'abandon).",
+          "liees": ["ch3-n7", "ch3-n11"],
+          "importance": 3,
+          "source": "cours"
+        },
+        {
+          "id": "ch3-n11",
+          "terme": "Mortalité ordinaire et mortalité infantile",
+          "definition": "Environ 30 décès pour 1 000 habitants, contre environ 9 aujourd'hui. Entre 1740 et 1789, 280 nouveau-nés sur 1 000 meurent avant un an. La misère aggrave encore ce risque.",
+          "explication_simple": "On baptise le jour même parce que l'enfant est un mort en puissance. Il n'est sorti d'affaire que vers 15 ans.",
+          "exemple": "À Chartres, les chanoines meurent vers 72 ans, les salariés vers 49 ans. Dans le Thymerais (1785-1791), sur 1 000 enfants, 597 laboureurs et 515 journaliers vivent encore à 15 ans. Goubert : deux enfants pour faire un adulte. Ariès : pas d'« enfant roi ».",
+          "formule": "mortalité infantile 1740-1789 = 280/1000",
+          "variables": {
+            "280/1000": "Part des nouveau-nés morts avant un an dans le cours",
+            "30/1000": "Taux brut de mortalité retenu pour l'Ancien Régime",
+            "9/1000": "Ordre de grandeur actuel cité par le cours"
+          },
+          "piege": "Mélanger mort endogène (accouchement, tétanos ombilical) et mort exogène (diarrhée, froid, accidents, nourrice) sans les distinguer. Le cours cite jusqu'à 90 % de morts chez la nourrice pour les enfants abandonnés : exemple oral, pas moyenne de tous les nourrissons.",
+          "liees": ["ch3-n5", "ch3-n10", "ch3-n13"],
+          "importance": 3,
+          "source": "cours"
+        },
+        {
+          "id": "ch3-n12",
+          "terme": "Mortalité extraordinaire et débat sur la famine",
+          "definition": "Les crises multiplient les sépultures par quatre ou cinq, font chuter mariages et naissances, et durent de six mois à deux ans. Goubert et Meuvret y voient la faim après la hausse du pain. Chaunu et Baehrel y voient les épidémies sur des corps affaiblis.",
+          "explication_simple": "Les deux thèses ne mesurent pas la même chose. L'une suit le prix du grain. L'autre suit la cause écrite de la mort.",
+          "exemple": "Été pourri, pain trop cher, les pauvres empruntent un an et ne peuvent pas emprunter une seconde fois : disette, puis famine, chez Goubert et Meuvret. Côte, bocage et forêt empêchent, selon Chaunu, de mourir le ventre vide.",
+          "piege": "Écrire « Bacherel ». C'est René Baehrel, 1962. Ne pas dire que Goubert a menti parce qu'il était communiste : le cours demande de connaître l'orientation des auteurs et de les confronter.",
+          "liees": ["ch3-n2", "ch3-n11"],
+          "importance": 3,
+          "source": "cours"
+        },
+        {
+          "id": "ch3-n13",
+          "terme": "Médecine d'Ancien Régime",
+          "definition": "Peu de médecins, formés sans vraie expérimentation, et des chirurgiens encore proches des barbiers. On saigne, on purge, on opère sans anesthésie.",
+          "explication_simple": "La médecine accompagne le régime démographique. Elle ne le renverse pas avant le XIXe siècle.",
+          "exemple": "Le cours compte environ 2 000 médecins en 1786. Fistule de Louis XIV opérée en 1686 sans anesthésie. Les chirurgiens de l'époque napoléonienne se vantent d'amputer une jambe en une minute et demie.",
+          "piege": "Faire de ces chiffres une statistique nationale silencieuse. Les dire comme les repères du cours.",
+          "liees": ["ch3-n11"],
+          "importance": 1,
+          "source": "cours"
+        }
+      ],
+      "exercices_types": [
+        {
+          "id": "ex-ch3-diss",
+          "intitule": "Dissertation : La population française sous l'Ancien Régime",
+          "donnees": {
+            "sujet": "La population française sous l'Ancien Régime",
+            "problematique": "Cette population est-elle stagnante, nombreuse dans ses foyers et universellement mariée, ou un régime jeune et rural, à croissance lente, réglé par le mariage tardif et la mort ?"
+          },
+          "etapes": [
+            "Casser d'entrée les trois idées reçues, puis les démontrer.",
+            "I. 15-18 millions vers 1500, environ 22 vers 1740, feux × 4, pertes de 2 à 3 millions en quelques années.",
+            "II. Densités, 80 % de ruraux, Paris 530 000, migrations, pyramide 40/50/9, ménage de 4,5.",
+            "III. Malthus et Bideau, endogamie, mortalité infantile à 280 pour 1 000, Goubert contre Chaunu et Baehrel.",
+            "Conclure sur l'impossibilité de se projeter et sur le XIXe siècle comme seuil médical."
+          ],
+          "resultat": "Copie qui contient les trois abandons du cours et qui ne récite ni 0,01 % d'illégitimes ni le décompte faux des enfants d'Anne de Bretagne.",
+          "notions_mobilisees": ["ch3-n1", "ch3-n2", "ch3-n3", "ch3-n6", "ch3-n7", "ch3-n8", "ch3-n11", "ch3-n12"]
+        }
+      ]
+    }
+  ],
+  "a_verifier": [
+    "Monnaie frappée en or, argent ou bronze : les cahiers la placent à la fin du Néolithique. C'est un anachronisme (Lydie, VIIe siècle av. J.-C.). En copie, s'arrêter au troc et à la notion de valeur.",
+    "Villes, armées permanentes et cités-États ne datent pas de −8000. La révolution urbaine de Childe se place au IVe millénaire. Le cours les enchaîne trop vite.",
+    "« R. Beard » et « R. Brard » sont vraisemblablement Robert Braid, auteur d'un article sur les ordonnances du travail (« Et non ultra », 2003). Ne pas lui attribuer une citation inventée. Les cinq effets économiques sont ceux du cours.",
+    "« Rochester » : identité non établie. Leicester = Henry Knighton, chanoine augustinien.",
+    "Ordonnance de Jean II : les deux cahiers disent 1354. Les historiens citent surtout le 30 janvier 1351, pour la vicomté de Paris. Suivre 1354 devant le professeur.",
+    "Survie une fois les bubons déclarés : retenir moins de 0,5 %, pas 0,05 %.",
+    "Angleterre : 3,8 millions d'habitants et 1,7 million de morts sont les chiffres du cours, pas le seul consensus.",
+    "Population de 1740 : le cours dit environ 22 millions. L'INED reconstitue environ 24,6 millions sur le territoire actuel.",
+    "Naissances illégitimes : le cahier écrit 0,01 %, incohérent. INED : environ 1 % en 1740-1749, environ 2 % vers 1780. Le cours cite un ordre de 12 % en ville, gonflé par l'abandon : à présenter comme contraste, pas comme taux unique.",
+    "35 % de ménages célibataires à Rouen, 90 % de morts chez la nourrice pour les enfants abandonnés, environ 2 000 médecins en 1786 : exemples oraux du cours, pas des moyennes nationales à généraliser sans le dire.",
+    "Anne de Bretagne : ne pas réciter « mariée à 12 ans, 8 enfants puis 7 ». Née en 1477, mariée vers 14 ans ; deux filles survivent avec Louis XII, Claude et Renée.",
+    "Lecture politique Goubert-Meuvret (PCF) contre Chaunu-Baehrel (anticommunistes) : clé orale du cours pour confronter les auteurs. Ne pas la transformer en procès.",
+    "« Bacherel » = René Baehrel ; « Mastus » = Malthus ; « Peine le laboureur » = Pierre le laboureur, de William Langland.",
+    "Bipédie et ordre Homo habilis / Homo erectus : le cahier est confus et le développement est hors sujet pour la dissertation."
+  ]
+}

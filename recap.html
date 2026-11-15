@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Récap — Histoire des faits économiques</title>
+<script>
+try {
+  var th = localStorage.getItem('hfe-theme');
+  if (th) document.documentElement.setAttribute('data-theme', th);
+  else if (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches) document.documentElement.setAttribute('data-theme', 'dark');
+} catch (e) {}
+</script>
+<style>
+:root {
+  --bg: #f3ecdf; --paper: #fffaf3; --ink: #1e1a16; --muted: #5c5348;
+  --line: #e3d5c3; --accent: #8d3b2f; --accent-ink: #fffaf3;
+  --ok-bg: #e5f4eb; --warn-bg: #f8efd8; --warn: #8a5a12;
+  --lien: #8a5a12; --fin: #1d6b42;
+  --sans: "Segoe UI", system-ui, sans-serif;
+  --serif: Palatino, "Palatino Linotype", Georgia, serif;
+  --bar: 118px;
+}
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #141210; --paper: #211c17; --ink: #f4ecdf; --muted: #cbbba6;
+  --line: #3c342c; --accent: #e39a86; --accent-ink: #211410;
+  --ok-bg: #1a3326; --warn-bg: #3a2e18; --warn: #e6c98a;
+  --lien: #e6c98a; --fin: #9ed7b4;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.55; overflow-wrap: break-word; padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+header { background: var(--paper); border-bottom: 1px solid var(--line); padding: calc(16px + env(safe-area-inset-top)) 22px 16px; display: flex; justify-content: space-between; gap: 16px; align-items: center; flex-wrap: wrap; }
+.head-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.kicker { margin: 0; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); font-size: 12px; }
+h1, h2, h3 { font-family: var(--serif); font-weight: 600; line-height: 1.2; }
+h1 { margin: 0; font-size: 28px; }
+h2 { font-size: 30px; margin: 0 0 12px; scroll-margin-top: calc(var(--bar) + env(safe-area-inset-top)); }
+h3 { font-size: 22px; margin: 22px 0 8px; }
+a { color: var(--accent); }
+.sticky-nav { position: sticky; top: env(safe-area-inset-top); z-index: 3; background: var(--paper); border-bottom: 1px solid var(--line); }
+.modes, .jump { display: flex; gap: 8px; align-items: center; padding: 8px 22px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.modes { border-bottom: 1px solid var(--line); flex-wrap: nowrap; }
+.modes span { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-right: 4px; flex: 0 0 auto; }
+.jump { overflow-x: auto; }
+#nav-complet, #nav-express, #nav-sujets { display: flex; gap: 8px; }
+#nav-complet[hidden], #nav-express[hidden], #nav-sujets[hidden] { display: none; }
+.jump a, .modes button, .back {
+  font: inherit; font-size: 16px; text-decoration: none; border: 1px solid var(--line); background: var(--bg);
+  color: var(--ink); border-radius: 999px; padding: 8px 14px; min-height: 44px; cursor: pointer;
+  white-space: nowrap; flex: 0 0 auto;
+}
+.modes button[aria-pressed="true"], .jump a:hover, .modes button:hover, .back:hover {
+  background: var(--accent); color: var(--accent-ink); border-color: var(--accent);
+}
+main { max-width: 920px; margin: 0 auto; padding: 22px 18px calc(72px + env(safe-area-inset-bottom)); }
+.card, .def, .plan, .piege, .ok, .chaine p, td, dd { overflow-wrap: break-word; }
+.chaine p { margin: 0 0 14px; }
+section.theme, #chiffres, #auteurs { scroll-margin-top: calc(var(--bar) + env(safe-area-inset-top)); }
+section.theme { margin-top: 36px; }
+.express section.theme > h3,
+#complet h3 {
+  margin-top: 16px;
+}
+.express section.theme > h3 {
+  font-size: 18px;
+  margin-top: 16px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-bottom: 0;
+  border-radius: 14px 14px 0 0;
+  padding: 12px 16px 8px;
+}
+.express section.theme > h3 + .defs,
+.express section.theme > h3 + ul {
+  margin: 0 0 4px;
+  padding: 0 16px 12px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-top: 0;
+  border-radius: 0 0 14px 14px;
+}
+.express section.theme > h3 + .card {
+  margin-top: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.defs { margin: 0; }
+.defs div { display: grid; grid-template-columns: minmax(11rem, 16rem) 1fr; gap: 8px 16px; padding: 9px 0; border-bottom: 1px solid var(--line); }
+.defs div:last-child { border-bottom: 0; }
+.defs dt { font-weight: 600; }
+.defs dd { margin: 0; }
+.plan-steps { list-style: none; padding: 8px 0 0; margin: 0; }
+.plan-steps li { display: block; margin: 0; padding: 10px 0; border-top: 1px solid var(--line); overflow: auto; }
+.plan-steps li:first-child { border-top: 0; }
+.plan-steps li::before {
+  content: "I"; float: left; margin: 1px 12px 4px 0; text-align: center; font-size: 13px; font-weight: 700;
+  color: var(--accent-ink); background: var(--accent); border-radius: 999px; padding: 4px 8px; min-width: 5.4rem;
+}
+.plan-steps li:nth-child(2)::before { content: "Lien"; background: var(--lien); }
+.plan-steps li:nth-child(3)::before { content: "II"; }
+.plan-steps li:nth-child(4)::before { content: "Fin"; background: var(--fin); }
+.plan-steps li:nth-child(5)::before { content: "Suite"; background: var(--muted); }
+.card, .def, .plan, .piege, .ok {
+  background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; margin: 10px 0;
+}
+.def strong { display: block; font-size: 17px; }
+.def p { margin: 6px 0 0; }
+.piege { background: var(--warn-bg); }
+.ok { background: var(--ok-bg); }
+ul { margin: 8px 0; padding-left: 1.2em; }
+li { margin: 4px 0; }
+.table-scroll { overflow-x: auto; margin: 10px 0 18px; -webkit-overflow-scrolling: touch; }
+table { width: 100%; border-collapse: collapse; background: var(--paper); border-radius: 14px; overflow: hidden; }
+.table-scroll table { min-width: 680px; margin: 0; }
+th, td { text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); padding: 8px 10px; }
+th { font-size: 13px; color: var(--muted); }
+@media (max-width: 700px) {
+  :root { --bar: 132px; }
+  .defs div { grid-template-columns: 1fr; }
+  h1 { font-size: 24px; }
+  h2 { font-size: 26px; }
+}
+@media print {
+  .sticky-nav, .back { display: none; }
+  body, [data-theme="dark"] body { background: white; color: #1e1a16; }
+  .card, .def, .plan, .piege, .ok, .defs div { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <p class="kicker">Avant la dissertation</p>
+    <h1>Récap entier du cours</h1>
+  </div>
+  <div class="head-actions">
+    <button type="button" class="back" id="theme" aria-label="Changer le thème clair ou sombre">Thème</button>
+    <a class="back" href="index.html">Retour au site</a>
+  </div>
+</header>
+<div class="sticky-nav">
+  <div class="modes">
+    <span>Affichage</span>
+    <button type="button" data-mode="complet" aria-pressed="true">Récap complet</button>
+    <button type="button" data-mode="express" aria-pressed="false">Récap express</button>
+    <button type="button" data-mode="sujets" aria-pressed="false">Sujets</button>
+  </div>
+  <nav class="jump" aria-label="Thèmes">
+    <span id="nav-complet">
+      <a href="#t1">1. Néolithique</a>
+      <a href="#t2">2. Peste</a>
+      <a href="#t3">3. Population</a>
+      <a href="#chiffres">Chiffres</a>
+      <a href="#auteurs">Auteurs</a>
+    </span>
+    <span id="nav-express" hidden>
+      <a href="#e1">1. Néolithique</a>
+      <a href="#e2">2. Peste</a>
+      <a href="#e3">3. Population</a>
+    </span>
+    <span id="nav-sujets" hidden>
+      <a href="#s1">1. Néolithique</a>
+      <a href="#s2">2. Peste</a>
+      <a href="#s3">3. Population</a>
+    </span>
+  </nav>
+</div>
+<main>
+<div id="express" class="express" hidden>
+<p class="lead">Une lecture par thème : chaque phrase dit la cause, le fait et ce qui en sort. Le plan d’1 h 30 reste en cinq lignes, en dessous.</p>
+
+<section class="theme" id="e1">
+  <h2>Thème 1. Le Néolithique, une révolution économique et sociale</h2>
+  <div class="chaine">
+    <p>Au Paléolithique, d’environ −150 000 à −12 000, on est nomade parce qu’on vit de la chasse, de la pêche et de la cueillette. On tue et on mange tout de suite, donc rien ne se stocke et rien ne se transmet comme une richesse.</p>
+    <p>Vers −12 000, le climat s’assèche. Jacques Brasseul situe ce basculement sur les plateaux qui vont de l’Inde à la Méditerranée, avec un épicentre au Kurdistan et en Irak. Le gros gibier se raréfie, la chasse rapporte moins, et les groupes s’épuisent, tombent malades ou se réduisent. Ce n’est pas une mauvaise semaine : la météo se prévoit sur environ 72 heures, le climat, lui, change la faune et la flore sur des millénaires.</p>
+    <p>Le chien est déjà là vers −12 000, enterré parfois avec un homme, parce qu’il aide à chasser. Ce n’est pas encore un animal de ferme. Entre −12 000 et −8000, le Mésolithique est le milieu, pas « le micro » : la montée des eaux laisse moins de gros galets, donc on taille des microlithes, et l’arc et le filet prennent le petit gibier.</p>
+    <p>Entre −9000 et −8000, au Proche-Orient, Vere Gordon Childe, d’après Pumpelly, explique la domestication par les oasis. L’aridité rassemble hommes, bêtes et plantes près de l’eau, et cette promiscuité permet de garder ce qu’on observait. Hypothèse du cours : les femmes passent du blé sauvage à la culture, parce que le gibier ne nourrit plus les enfants. La population plus nombreuse vient après, quand la nourriture est plus sûre. Elle n’est pas le projet du départ. L’espérance de vie tourne autour de 25 ans, tirée vers le bas par la mort des enfants.</p>
+    <p>Marshall Sahlins, dans <em>Âge de pierre, âge d’abondance</em>, montre que ce choix coûte plus de travail que la chasse. On ne devient donc pas paysan parce que c’est plus facile. Robert Braidwood y voit une décision : on sélectionne le vivant, le sanglier devient cochon, et l’on aménage des champs et des villages. Douglass North, en 1981, appelle cela la première révolution économique, parce que l’agriculture va avec la propriété du champ.</p>
+    <p>On reste sur la terre pour ne pas la perdre. Le silo, le grenier et le troupeau deviennent la richesse. La maison se cloisonne, la famille se lie à l’héritage, les artisans échangent avec les paysans. Comparer des poteries et un mouton, c’est déjà une valeur. La pièce frappée, elle, naît seulement en Lydie au VIIe siècle avant notre ère. Le chat arrive avec les greniers, pour les rongeurs. Les cités et l’écriture attendent la révolution urbaine de Childe, au IVe millénaire, pas −8000. D’ici là, les flèches et les squelettes blessés montrent qu’un stock se vole et se défend.</p>
+  </div>
+  <h3>Sujet, 1 h 30</h3>
+  <article class="card sujet">
+    <p><strong>Le Néolithique : une révolution économique et sociale subie ou choisie ?</strong></p>
+    <p><strong>Accroche.</strong> En 1981, North parle de la première révolution économique, bien avant l’industrie.</p>
+    <p><strong>Définition.</strong> Pierre polie, −9000 à −8000 au Proche-Orient. Fin de la prédation nomade, début de la production sédentaire.</p>
+    <p><strong>Problématique.</strong> Si l’agriculture coûte plus de travail que la chasse, est-ce une échappatoire subie ou un choix qui fonde la production, la propriété et la hiérarchie ?</p>
+    <ol class="plan-steps">
+      <li><strong>I.</strong> Contrainte d’abord : assèchement, Brasseul, oasis de Childe. Choix ensuite : Sahlins, Braidwood, le cochon.</li>
+      <li><strong>Lien.</strong> Subi dans la cause, voulu dans la forme, le basculement change l’organisation.</li>
+      <li><strong>II.</strong> Stock, village, population qui suit. Puis propriété, métiers, poteries contre mouton, North, flèches.</li>
+      <li><strong>Conclusion.</strong> Première révolution économique : de la prédation au stock, à la propriété et à la hiérarchie.</li>
+      <li><strong>Ouverture.</strong> Au IVe millénaire, la révolution urbaine de Childe : cités et écriture.</li>
+    </ol>
+  </article>
+</section>
+
+<section class="theme" id="e2">
+  <h2>Thème 2. Comment une épidémie peut mettre à mal une économie</h2>
+  <div class="chaine">
+    <p>Le XIVe siècle n’est pas une seule mauvaise année. C’est une crise longue, avec trois pointes qu’il faut garder distinctes. Les coller toutes sur 1348, c’est rater le sujet.</p>
+    <p>La première pointe, 1315-1317, n’est pas la peste. Ce sont des intempéries exceptionnelles et une famine, et seulement en Europe du Nord. Le Sud n’est pas touché de la même façon. Gilles Le Muisit, à Tournai, décrit ces pluies et cette faim. Les corps affaiblis ouvrent déjà la porte aux maladies. À Ypres, en 1316, environ un dixième de la population meurt en quelques mois. Trente ans avant la peste, le Nord est donc déjà vidé et fragile.</p>
+    <p>La deuxième pointe, 1347-1350, est la peste noire. Boccace décrit les bubons et une mort en trois jours. Une fois le mal déclaré, moins de 0,5 % survivent. Froissart parle d’un tiers du monde, c’est-à-dire de l’Europe. Paris perd environ la moitié de ses habitants, Hambourg environ 80 %. Elle ne s’arrête pas à cette vague. Quatorze retours suivent jusqu’en 1415, chacun avec son cortège de morts. Les paysans quittent les terres. Un champ abandonné ne nourrit plus personne, et la faim fait alors d’autres victimes, en ville comme dans les villages.</p>
+    <p>La troisième pointe, 1370-1380, frappe cette fois le sud de l’Europe. C’est d’abord une disette. Les corps sont de nouveau faibles, et la peste en profite pour revenir. Les révoltes qui suivent vont plus loin que la Jacquerie de 1358, puis elles sont écrasées. À ces trois pointes s’ajoute la guerre de Cent Ans. Avec la faim et la peste, elle est le troisième fléau. Le siècle se lit comme une crise générale qui se décline, pas comme un accident unique.</p>
+    <p>La peur cherche alors des coupables. Les riches reprochent aux pauvres d’avoir répandu le mal. Les pauvres reprochent aux riches de ne penser qu’à eux. L’accusation tombe sur les juifs : pogroms, synagogues détruites. La peste s’ajoute à la faim et à la guerre. Elle ne cause pas mécaniquement chaque révolte. Elle donne un visage à une colère déjà là.</p>
+    <p>En 1358, la Jacquerie prend son nom de l’habit du paysan, « Jacques ». Le mouvement est bref, trois à quatre semaines, autour de Paris, sur l’équivalent d’une quinzaine de départements. Les Jacques tuent et torturent plusieurs centaines de personnes. La répression en tue environ 20 000. Au même moment, Étienne Marcel agit à Paris. La colère est courte. La punition enlève encore des bras, donc encore de la production.</p>
+    <p>Caffa, port de Crimée, est assiégée en 1346 par les Mongols de Djanibeg. Le récit dit qu’ils catapultent des cadavres, que le mal gagne la ville, et que des navires génois et vénitiens l’emportent, sans quarantaine efficace. La source est unique, indirecte, connue par une copie tardive : Gabriele de’ Mussi, notaire italien. On a tenu ce récit pour vrai jusqu’aux années 2000 parce qu’il concentre les peurs : l’étranger, la guerre, le navire. La peste se transmet par les puces, qui quittent le corps dès la mort. Des cadavres catapultés ne portent plus le vecteur. Ce siège n’explique donc pas l’arrivée du mal.</p>
+    <p>Tana, aujourd’hui Azov, est déjà touchée en 1345, un an avant Caffa. Le trafic est dense entre Gênes, Venise et Tana. La peste entrerait par le commerce, en temps de paix, pas par le siège. Accuser Caffa, c’est accuser la guerre et l’étranger. Admettre Tana, c’est admettre que les marchands transportent le fléau. Le récit de Caffa dit nos peurs. L’hypothèse de Tana dit nos échanges. Un consensus étroit reste : des navires partis de la mer Noire arrivent en Italie avec des hommes infectés.</p>
+    <p>La mort vide les bras, et cinq effets suivent. La production chute parce que les paysans sont morts ou enfuis. La demande chute parce que les morts n’achètent plus et que les vivants se restreignent. La monnaie par tête monte parce que les mêmes pièces se partagent entre moins de gens. Les rentes baissent parce qu’une terre vide ne paie plus de loyer. L’impôt se rétrécit parce qu’il y a moins de feux. Le fisc anglais, chiffre à écrire tel quel, compte 3,8 millions d’habitants avant la peste et 1,7 million de morts, donc environ 2,1 millions ensuite. Moins d’impôts, donc des amendes. D’autres historiens partent plus haut : on le présente comme le chiffre du cours. Le nom entendu « R. Beard » ou « R. Brard » vise vraisemblablement Robert Braid. On apprend les cinq effets. On n’invente pas une citation. Il faut plus de deux siècles et demi pour retrouver la population.</p>
+    <p>Ceux qui restent sont rares, donc ils imposent leurs conditions. Le chroniqueur de Rochester, dont l’identité n’est pas sûre, constate que le pain, le blé et les légumes montent, mais que les ouvriers peuvent quand même acheter. Henry Knighton, chanoine augustinien de Leicester, voit le salaire des moissonneurs doublé ou triplé, payé en argent ou en nature. William Langland (1332-1386), dans <em>Pierre le laboureur</em>, pas « Peine », décrit le passage du lard à la viande fraîche, table des bourgeois et des nobles. John Gower (1330-1402), pas « Gowen », écrit que les classes laborieuses exigent pour leur ventre ce qu’exige un seigneur. Fromage, lait et vin, festin ou boisson de seigneur, deviennent ordinaires. « Ces bons vieux temps sont anéantis. » Ils sont « rares, avares et oisifs ». S’ils n’obtiennent pas leurs conditions, ils partent. Gower va jusqu’à dire que les seigneurs devront se soumettre, à moins d’obtenir justice par la force. Des femmes reprennent aussi l’activité du mari mort. La formule du scandale, vue d’en haut, tient en une ligne : deux fois plus pour travailler trois fois moins.</p>
+    <p>Les officiers figent alors le marché pour sauver l’ordre, pas seulement l’économie. En Provence, en 1348, le sénéchal Raymond d’Agoult voit les moissonneurs demander plus que la valeur du blé récolté. Il bloque les prix de 16 types de chaussures, 14 variétés de vêtements, 9 espèces de volaille et 15 coupes de viande. Il limite le nombre d’embauches. Se réunir pour négocier un salaire coûte la main coupée. En Angleterre, Édouard III, en juin 1349, ramène les gages à ceux de 1346, oblige à accepter l’emploi, rétablit les prix d’avant la peste et interdit de donner à un valide qui mendie. Le Statut de 1351, puis le Statut de Cambridge en 1388, ordonnent de rester dans son secteur agricole, sous peine d’amendes. Deux buts : des bras dans chaque région, et renflouer le trésor. L’information circule mal. Beaucoup sont condamnés sans avoir su la règle. En France, Jean II le Bon : l’ordonnance à retenir est datée de 1354. Le préambule dit qu’on peut vivre en ne travaillant que deux jours par semaine, le reste à la taverne. Les historiens citent souvent le 30 janvier 1351, pour la vicomté de Paris. En copie, on suit 1354. La parade reste la même partout : on affiche l’ancien salaire, et l’on ajoute du blé. La loi tient sur le papier. Le revenu, non.</p>
+    <p>Walter Scheidel, <em>The Great Leveler</em> (2017), et Guido Alfani mesurent le resserrement des fortunes. En Italie, les 10 % les plus riches passent d’environ 65 % à 50 % de la richesse vers 1350, pour environ deux siècles. Le décret florentin du 9 octobre 1348 le dit vu d’en haut : « Alors que beaucoup de citoyens étaient devenus pauvres, certains pauvres étaient devenus riches. » Les rois plafonnent pour faire cesser ce scandale. Ils n’effacent pas le fait : moins d’hommes, plus de terre par survivant, plus de pouvoir pour qui travaille. Ce n’est pas l’égalité. 50 %, ce n’est pas un partage. La concentration remonte du XVIe au XVIIIe siècle.</p>
+  </div>
+  <h3>Sujet, 1 h 30</h3>
+  <article class="card sujet">
+    <p><strong>Comment une épidémie peut-elle mettre à mal et transformer une économie ? L’exemple de la peste noire.</strong></p>
+    <p><strong>Accroche.</strong> « De la faim, de la peste, de la guerre, libère-nous, Seigneur. »</p>
+    <p><strong>Définition.</strong> Peste de 1347, survie inférieure à 0,5 %, quatorze retours jusqu’en 1415, un tiers à la moitié de l’Europe. Famines de 1315 et 1370, guerre de Cent Ans.</p>
+    <p><strong>Problématique.</strong> Désastre de production et de fisc, ou choc qui renverse travail et terre, resserre les fortunes et fait réguler le marché ?</p>
+    <ol class="plan-steps">
+      <li><strong>I.</strong> Commerce contre mythe de Caffa : Le Muisit, Tana, Boccace. Puis les cinq effets, Paris, Hambourg, Angleterre, Jacquerie.</li>
+      <li><strong>Lien.</strong> Le vide change la rareté : le pouvoir passe des seigneurs aux bras qui restent.</li>
+      <li><strong>II.</strong> Salaires ×2 ou ×3, Rochester, Knighton, Langland, Gower. Puis la loi contournée en blé, et 65 % puis 50 %.</li>
+      <li><strong>Conclusion.</strong> Destruction immédiate du fisc et des champs, et transformation : salaires réels, inégalités réduites, régulation royale.</li>
+      <li><strong>Ouverture.</strong> Vers 1500, 15 à 18 millions en France. L’Ancien Régime régulera par le mariage tardif.</li>
+    </ol>
+  </article>
+</section>
+
+<section class="theme" id="e3">
+  <h2>Thème 3. La population française sous l’Ancien Régime</h2>
+  <div class="chaine">
+    <p>La population française n’est pas immobile. Comptée par les feux, une maison qui fume multipliée par environ 4, elle passe de 15 à 18 millions vers 1500 à environ 22 millions en 1740. C’est le chiffre du cours. L’INED trouve 24,6 millions sur le territoire actuel, et il ne faut pas le substituer. Entre les deux, vers 1600, on est entre 16 et 20 millions, et vers 1700 autour de 21. La hausse est réelle. Elle refuse l’idée de stagnation.</p>
+    <p>Elle est pourtant cassée. En trois ou quatre ans, une épidémie ou une disette peut emporter 2 à 3 millions de personnes, puis le niveau se stabilise. On ne se projette donc pas, et l’on n’investit pas comme si l’on connaissait les effectifs de l’année suivante.</p>
+    <p>Quatre habitants sur cinq vivent à la campagne, soit 80 %. La France n’atteint 50 % d’urbains que vers 1938, environ un siècle et demi après l’Angleterre. Vers 1700, on dépasse 80 à 90 habitants au km² autour de Lille, Rouen et Paris. On tombe sous 40 en Sologne, à cause d’environ 1 500 étangs, en Poitou à cause des marais, en Camargue à cause des moustiques, en Provence à cause des pillages, en Alsace à cause de la guerre. Paris a 530 000 habitants, Nantes 80 000, Rennes 40 000. Vingt villes seulement dépassent 30 000.</p>
+    <p>Le ménage moyen compte environ 4,5 personnes. Il est complexe, pas nombreux. Le célibat définitif monte d’environ 7 % vers 1660 à 10 % en 1789. À Rouen, 35 % des ménages sont des célibataires, mais c’est une ville, pas le royaume. Ces trois chiffres cassent trois images : stagnation, foules, mariage de tous.</p>
+    <p>On se marie tard parce que la terre est prise. Alain Bideau le dit : on s’installe surtout à la mort du père. Les cadets restent, entrent dans les ordres ou dans l’armée. À la fin du XVIIe siècle, les hommes ont environ 27 ou 28 ans, les filles des villes 25 ou 26. Malthus y voit un frein : on n’a pas d’enfants qu’on ne peut pas nourrir. Entre 1740 et 1789, 68 % des mariages unissent deux habitants de la même paroisse, souvent à moins de 2 km. Au XVIIe siècle, 65 % des noces ont lieu le lundi. Le conjoint et le jour sont surveillés.</p>
+    <p>Malgré ce retard, une union dure environ quinze ans et le cours compte environ sept naissances, parce que l’allaitement espace les enfants d’environ deux ans. Entre 1740 et 1789, 280 nouveau-nés sur 1 000 meurent avant un an. Pierre Goubert résume : il fallait deux enfants pour faire un adulte. Philippe Ariès ajoute qu’il n’y a pas d’enfant roi, puisqu’on n’est sorti d’affaire que vers 15 ans. En 1740, 40 % ont moins de 20 ans, 50 % sont adultes, et 9 % ont 60 ans ou plus. C’est une population jeune. Au XVIe siècle, environ 85 % des procès en sorcellerie visent des femmes, souvent vieilles et veuves, parce qu’elles sont devenues plus nombreuses après 50 ans.</p>
+    <p>La misère aggrave cette mort. À Chartres, les chanoines, nourris et chauffés, meurent vers 72 ans, les salariés vers 49. Dans le Thymerais, entre 1785 et 1791, sur 1 000 enfants, 597 vivent encore à 15 ans chez les laboureurs, et 515 chez les journaliers. Un été pourri fait monter le pain, aliment des deux tiers. On emprunte un an. La seconde mauvaise année, plus de crédit. Goubert et Meuvret y voient la famine. Pierre Chaunu et René Baehrel, en 1962, y voient les épidémies sur des corps faibles. On lit les deux. Environ 2 000 médecins en 1786, et l’opération de la fistule de Louis XIV en 1686 sans anesthésie, montrent que la médecine ne renverse pas ce régime avant le XIXe siècle.</p>
+  </div>
+  <h3>Sujet, 1 h 30</h3>
+  <article class="card sujet">
+    <p><strong>La population française sous l’Ancien Régime : structures démographiques et régulations économiques.</strong></p>
+    <p><strong>Accroche.</strong> Goubert : « Il fallait deux enfants pour faire un adulte. »</p>
+    <p><strong>Définition.</strong> XVIe-XVIIIe siècles. Feux × 4 : 15-18 millions vers 1500, 22 millions en 1740. L’INED dit 24,6 sur le territoire actuel.</p>
+    <p><strong>Problématique.</strong> Comment une population jeune, rurale à 80 % et mobile ne croît-elle que lentement, et comment la terre, le mariage tardif et la mort règlent-ils ce régime ?</p>
+    <ol class="plan-steps">
+      <li><strong>I.</strong> Hausse réelle en dents de scie, pyramide 40 / 50 / 9. Puis 80 % de ruraux, densités, villes, migrations, ménage de 4,5.</li>
+      <li><strong>Lien.</strong> Cette modestie a deux verrous : la terre retarde les noces, la mort fauche les plus pauvres.</li>
+      <li><strong>II.</strong> Malthus et Bideau, 7 % puis 10 %, 68 % dans la paroisse. Ensuite 280 pour 1 000, Chartres, Goubert contre Chaunu, 2 000 médecins.</li>
+      <li><strong>Conclusion.</strong> Ni stagnation, ni foules, ni mariage universel. Terre et mort empêchent de prévoir.</li>
+      <li><strong>Ouverture.</strong> Le XIXe siècle casse ce régime. 50 % d’urbains en 1938.</li>
+    </ol>
+  </article>
+</section>
+</div>
+<div id="sujets" hidden>
+<p class="lead">Deux ou trois sujets probables par thème. Chaque plan dit seulement ce qu’on place : la cause, le lien, les effets, et les chiffres à ne pas rater.</p>
+
+<section class="theme" id="s1">
+  <h2>Thème 1. Le Néolithique</h2>
+  <article class="card sujet">
+    <p><strong>Pourquoi cela s’est-il passé ?</strong></p>
+    <p><strong>Problématique.</strong> Si l’agriculture coûte plus de travail que la chasse, qu’est-ce qui force le passage, et qu’est-ce qu’on choisit ensuite ?</p>
+    <ol class="plan-steps">
+      <li><strong>I.</strong> La cause est climatique. Vers −12 000, Brasseul situe l’assèchement au Kurdistan et en Irak. La météo se prévoit sur environ 72 heures, le climat change la faune. Le gibier manque, les groupes s’épuisent. Childe, d’après Pumpelly, rassemble hommes, bêtes et plantes près de l’eau entre −9000 et −8000.</li>
+      <li><strong>Lien.</strong> Sahlins : le paysan travaille plus que le chasseur. Ce n’est donc pas un confort. La contrainte n’explique pas encore la forme du choix.</li>
+      <li><strong>II.</strong> Braidwood : on sélectionne, le sanglier devient cochon, on aménage champs et villages. North, en 1981, appelle cela la première révolution économique, parce que l’agriculture va avec la propriété du champ.</li>
+      <li><strong>Conclusion.</strong> Subi dans la cause, voulu dans la forme. La population plus nombreuse vient après, et l’espérance tourne autour de 25 ans, tirée par la mort des enfants.</li>
+      <li><strong>Ouverture.</strong> Le chien, vers −12 000, chasse encore. Le chat et les greniers, puis les cités, viennent plus tard.</li>
+    </ol>
+  </article>
+  <article class="card sujet">
+    <p><strong>Le Néolithique, une révolution économique et sociale.</strong></p>
+    <p><strong>Problématique.</strong> Le passage de la prédation à la production change-t-il seulement la nourriture, ou aussi la maison, l’échange et la hiérarchie ?</p>
+    <ol class="plan-steps">
+      <li><strong>I.</strong> Avant, on tue et on mange tout de suite : rien ne se stocke. Après, le silo, le grenier et le troupeau deviennent la richesse. On reste sur la terre pour ne pas la perdre.</li>
+      <li><strong>Lien.</strong> Un stock se garde. Il change donc la maison, la famille et ce qu’on échange.</li>
+      <li><strong>II.</strong> La maison se cloisonne, la famille se lie à l’héritage, les artisans échangent avec les paysans. Comparer des poteries et un mouton, c’est déjà une valeur. Les flèches et les squelettes blessés montrent qu’un stock se vole et se défend.</li>
+      <li><strong>Conclusion.</strong> Révolution économique : de la prédation au stock, à la propriété et à la hiérarchie. Pas seulement un outil de pierre polie.</li>
+      <li><strong>Ouverture.</strong> On s’arrête au troc. La pièce frappée naît en Lydie au VIIe siècle. Les cités et l’écriture attendent le IVe millénaire, pas −8000.</li>
+    </ol>
+  </article>
+  <article class="card sujet">
+    <p><strong>Subi ou choisi ?</strong></p>
+    <p><strong>Problématique.</strong> Le même dossier se lit-il d’abord comme une échappatoire, ou d’abord comme une décision ?</p>
+    <ol class="plan-steps">
+      <li><strong>I.</strong> Accent sur la cause. Assèchement, Brasseul, oasis. Hypothèse du cours : les femmes passent au blé parce que le gibier ne nourrit plus les enfants. Le chien reste un compagnon de chasse, pas un animal de ferme.</li>
+      <li><strong>Lien.</strong> Le climat pousse. Il ne dit pas encore comment on organise le village.</li>
+      <li><strong>II.</strong> Accent sur le choix, puis sur les effets. Braidwood et North pour la décision. Stock, famille, métiers et défense pour ce qui en sort.</li>
+      <li><strong>Conclusion.</strong> On ne choisit pas un camp. La copie forte tient la contrainte et le choix.</li>
+      <li><strong>Ouverture.</strong> La révolution urbaine de Childe, au IVe millénaire, est un autre seuil : cités et écriture.</li>
+    </ol>
+  </article>
+</section>
+
+<section class="theme" id="s2">
+  <h2>Thème 2. La peste</h2>
+  <article class="card sujet">
+    <p><strong>Comment une épidémie peut mettre à mal une économie ?</strong></p>
+    <p><strong>Problématique.</strong> La peste détruit-elle seulement les champs et le fisc, ou renverse-t-elle aussi le prix du travail ?</p>
+    <ol class="plan-steps">
+      <li><strong>I.</strong> Le trou. Trois pointes non fondues : 1315-1317 au Nord, 1347, 1370-1380 au Sud. Moins de 0,5 % de survie. Cinq effets : production, demande, monnaie par tête, rentes, impôt. Angleterre, chiffre du cours : 3,8 millions, 1,7 million de morts.</li>
+      <li><strong>Lien.</strong> Moins de bras renverse le prix du travail. Ceux qui restent deviennent rares, donc chers.</li>
+      <li><strong>II.</strong> Salaires ×2 ou ×3, Knighton, Langland, Gower. Puis la loi : juin 1349, 1354 dans le cours, Cambridge 1388. On affiche l’ancien salaire et l’on ajoute du blé. 65 % puis 50 % : nivellement, pas égalité.</li>
+      <li><strong>Conclusion.</strong> Désastre immédiat du fisc et des champs, et transformation : salaires réels, inégalités resserrées, régulation royale.</li>
+      <li><strong>Ouverture.</strong> Plus de deux siècles et demi pour retrouver la population. Vers 1500, la France est revenue autour de 15 à 18 millions.</li>
+    </ol>
+  </article>
+  <article class="card sujet">
+    <p><strong>Catastrophe ou transformation ?</strong></p>
+    <p><strong>Problématique.</strong> Faut-il s’arrêter au deuil, ou montrer ce que le vide change dans les revenus et dans la loi ?</p>
+    <ol class="plan-steps">
+      <li><strong>I.</strong> La destruction. Moins de blé, moins d’acheteurs, des terres vides qui ne paient plus de rente, moins de feux donc moins d’impôts, donc des amendes. Le trou démographique dure plus de deux siècles et demi.</li>
+      <li><strong>Lien.</strong> Le vide donne du pouvoir à qui reste. Le maître ne choisit plus, l’ouvrier choisit.</li>
+      <li><strong>II.</strong> Knighton : salaire doublé ou triplé. Langland : viande fraîche. Gower : le ventre d’un seigneur. La loi veut ramener l’ordre. Elle échoue en partie, parce que le blé s’ajoute au salaire légal.</li>
+      <li><strong>Conclusion.</strong> Catastrophe d’abord, conditions d’un autre marché du travail ensuite. Florence, le 9 octobre 1348, voit des pauvres devenus riches.</li>
+      <li><strong>Ouverture.</strong> La concentration des fortunes remonte du XVIe au XVIIIe siècle. 50 %, ce n’est pas un partage.</li>
+    </ol>
+  </article>
+  <article class="card sujet">
+    <p><strong>Faim, peste et guerre au XIVe siècle.</strong></p>
+    <p><strong>Problématique.</strong> Le siècle est-il un accident de 1348, ou une crise longue où la peste s’ajoute à la faim et à la guerre ?</p>
+    <ol class="plan-steps">
+      <li><strong>I.</strong> Trois pointes. 1315-1317, famine du Nord seulement, Le Muisit, Ypres environ un dixième. 1347-1350, peste noire, quatorze retours jusqu’en 1415. 1370-1380, disette du Sud, puis révoltes écrasées. La guerre de Cent Ans est le troisième fléau.</li>
+      <li><strong>Lien.</strong> La peste s’ajoute à la faim et à la guerre. Elle ne cause pas mécaniquement chaque révolte. Elle donne un visage à une colère déjà là.</li>
+      <li><strong>II.</strong> Caffa, 1346, se démonte : source unique et tardive, les puces quittent les morts. Tana, dès 1345, fait entrer le mal par le commerce. La Jacquerie, en 1358, dure trois à quatre semaines. La répression tue environ 20 000 personnes.</li>
+      <li><strong>Conclusion.</strong> Crise générale qui se décline, pas une seule mauvaise année. Coller 1315, 1347 et 1370, c’est rater le sujet.</li>
+      <li><strong>Ouverture.</strong> Les cinq effets économiques viennent après ce cadre. On ne les fond pas dans le récit de Caffa.</li>
+    </ol>
+  </article>
+</section>
+
+<section class="theme" id="s3">
+  <h2>Thème 3. L’Ancien Régime</h2>
+  <article class="card sujet">
+    <p><strong>La population française sous l’Ancien Régime.</strong></p>
+    <p><strong>Problématique.</strong> Comment une population jeune et rurale n’augmente-t-elle que lentement ?</p>
+    <ol class="plan-steps">
+      <li><strong>I.</strong> La hausse est réelle. Feux × environ 4 : 15 à 18 millions vers 1500, environ 22 millions en 1740. C’est le chiffre du cours. L’INED dit 24,6 : on le cite, on ne le substitue pas.</li>
+      <li><strong>Lien.</strong> Une crise peut emporter 2 à 3 millions de personnes en 3 ou 4 ans. On ne se projette donc pas.</li>
+      <li><strong>II.</strong> 80 % de ruraux, ménage d’environ 4,5 personnes, mariage tardif faute de terre, 280 nouveau-nés sur 1 000 morts avant un an. Ni stagnation, ni foules, ni mariage de tous.</li>
+      <li><strong>Conclusion.</strong> On ne produit pas la même économie qu’une population sûre de ses effectifs.</li>
+      <li><strong>Ouverture.</strong> 50 % d’urbains seulement vers 1938, longtemps après l’Angleterre.</li>
+    </ol>
+  </article>
+  <article class="card sujet">
+    <p><strong>Mariage, terre et fécondité.</strong></p>
+    <p><strong>Problématique.</strong> Comment la terre retarde-t-elle les noces, et pourquoi une union tardive ne fait-elle pas pour autant une famille immense ?</p>
+    <ol class="plan-steps">
+      <li><strong>I.</strong> Bideau : on s’installe surtout à la mort du père. Les cadets restent, entrent dans les ordres ou dans l’armée. Fin XVIIe : 27-28 ans pour les hommes, 25-26 ans pour les filles des villes. Célibat définitif vers 10 % en 1789.</li>
+      <li><strong>Lien.</strong> Malthus : reculer les noces raccourcit les années fertiles. La ménopause arrive vers 40 ans, donc une femme mariée à 25 ans n’a qu’environ quinze ans.</li>
+      <li><strong>II.</strong> L’allaitement espace les naissances d’environ deux ans. Le cours compte environ sept naissances. 68 % des mariages unissent la même paroisse entre 1740 et 1789. Au XVIIe siècle, 65 % des noces ont lieu le lundi.</li>
+      <li><strong>Conclusion.</strong> La terre commande le mariage. Le conjoint et le jour sont surveillés. On n’écrit pas un royaume où chacun se marie.</li>
+      <li><strong>Ouverture.</strong> Les 35 % de ménages célibataires à Rouen sont une ville, pas la moyenne du royaume.</li>
+    </ol>
+  </article>
+  <article class="card sujet">
+    <p><strong>La mort règle le nombre des vivants.</strong></p>
+    <p><strong>Problématique.</strong> Pourquoi tant de naissances ne font-elles pas autant d’adultes, et pourquoi les pauvres meurent-ils plus tôt ?</p>
+    <ol class="plan-steps">
+      <li><strong>I.</strong> En 1740, 40 % ont moins de 20 ans, 50 % sont adultes, 9 % ont 60 ans ou plus. En année courante, environ 30 décès pour 1 000. On baptise le jour même. Ariès : pas d’enfant roi avant environ 15 ans.</li>
+      <li><strong>Lien.</strong> Le rang change la mort. Nourri et chauffé, on vit plus longtemps que celui qui dépend du pain.</li>
+      <li><strong>II.</strong> Chartres : chanoines vers 72 ans, salariés vers 49. Thymerais, 597 contre 515 survivants à 15 ans. Goubert et Meuvret : été pourri, pain des deux tiers, famine. Chaunu et Baehrel, 1962 : l’épidémie sur des corps faibles. Environ 2 000 médecins en 1786.</li>
+      <li><strong>Conclusion.</strong> Goubert : deux enfants pour un adulte. On lit les deux chaînes. On n’écrit pas que Goubert a menti.</li>
+      <li><strong>Ouverture.</strong> La médecine n’inverse pas ce régime avant le XIXe siècle. La fistule de Louis XIV, en 1686, se fait sans anesthésie.</li>
+    </ol>
+  </article>
+</section>
+</div>
+<div id="complet">
+<p class="lead">Le dossier long : définitions, récits, pièges. Le jour de l’épreuve, ouvre le récap express : la fiche, puis le plan en cinq lignes.</p>
+
+<section class="theme" id="t1">
+  <h2>Thème 1 — Le Néolithique</h2>
+  <p><strong>Intitulés possibles.</strong> « Pourquoi cela s’est-il passé ? » ou « Le Néolithique, une révolution économique et sociale ». Les deux se traitent avec le même dossier : le premier insiste sur les causes, le second sur le changement de régime.</p>
+  <div class="plan">
+    <p><strong>Problématique.</strong> Le Néolithique est-il une échappatoire subie face au climat, ou une révolution voulue qui fait passer l’humanité de la subsistance à la production ?</p>
+    <p><strong>Plan.</strong></p>
+    <ol>
+      <li>Une contrainte : climat, Brasseul, raréfaction, théorie des oasis.</li>
+      <li>Un choix : Sahlins, Braidwood, North et la propriété.</li>
+      <li>La révolution : stock, famille, division du travail, valeur. Sans dater la monnaie frappée ni les villes-États de −8000.</li>
+    </ol>
+  </div>
+
+  <h3>Définitions</h3>
+  <article class="def"><strong>Néolithique</strong><p>Âge de la pierre nouvelle : on polit la pierre au lieu de seulement la tailler, et l’on passe à l’agriculture, à l’élevage et à la sédentarité. Le cours le situe vers −8000, avec des décalages selon les régions. Au Proche-Orient, agriculture et élevage s’installent entre 9000 et 8000 avant notre ère.</p></article>
+  <article class="def"><strong>Paléolithique</strong><p>Âge de la pierre ancienne, très long (ordre de grandeur du cours : environ −150 000 à −12 000). Chasse, pêche, cueillette. L’homme est nomade. On consomme tout de suite, on n’accumule pas.</p></article>
+  <article class="def"><strong>Mésolithique</strong><p>Période du milieu, dans le cours d’environ −12 000 à −8000, liée au réchauffement de la fin des glaciations. La montée des eaux réduit les gros galets : on fabrique des outils plus petits, les microlithes. L’arc et le filet servent à des proies plus petites. Méso veut dire milieu, pas micro.</p></article>
+  <article class="def"><strong>Météo</strong><p>Temps qu’il fait, prévisible à court terme, de l’ordre de 72 heures, et capable de passer d’un extrême à l’autre.</p></article>
+  <article class="def"><strong>Climat</strong><p>Orientation longue. Une région peut passer, en dix mille ans, d’un hiver à −20 °C à un climat à +5 °C. Ce n’est pas une mauvaise semaine : c’est un autre monde vivant.</p></article>
+  <article class="def"><strong>Économie de subsistance</strong><p>On tue ou on cueille, on consomme aussitôt. Pas de conservation, pas de stock, pas d’accumulation. On subvient aux besoins vitaux.</p></article>
+  <article class="def"><strong>Économie de production</strong><p>On sème, on élève, on stocke (silos, greniers, troupeaux reproducteurs). Le stock est une richesse. Plus on a de grain et de bêtes, plus on est riche.</p></article>
+  <article class="def"><strong>Théorie des oasis</strong><p>Gordon Childe (1892-1957), d’après Raphael Pumpelly. Le réchauffement assèche l’Asie. Hommes, bêtes et plantes se retrouvent dans les zones encore humides. Cette promiscuité permet la domestication, située par le cours entre 8000 et 9000 avant notre ère.</p></article>
+  <article class="def"><strong>Première révolution économique</strong><p>Formule de Douglass North, <em>Structure and Change in Economic History</em> (1981). Le Néolithique est le premier changement de régime économique : agriculture et propriété privée, bien avant l’industrie.</p></article>
+  <article class="def"><strong>Propriété et famille néolithiques</strong><p>Rester sur un champ fait naître la propriété. Avec elle, une famille liée à un lieu, à un stock et à une maison. Le cours ne dit pas que la parenté biologique n’existait pas : elle n’existait pas sous cette forme, liée à la terre et à l’héritage.</p></article>
+  <article class="def"><strong>Valeur et pré-monnaie</strong><p>La spécialisation oblige à comparer : combien de poteries pour un mouton ? Cette question est déjà une question de valeur. Le cours parle ensuite de pré-monnaie. La pièce frappée, elle, n’est pas néolithique.</p></article>
+
+  <h3>Ce qu’il faut savoir raconter</h3>
+  <div class="card">
+    <p><strong>La contrainte, Brasseul.</strong> À la fin des glaciations, les plateaux et les plaines de l’Inde à la Méditerranée deviennent plus secs. Épicentre : Kurdistan et Irak. Le cours date cela d’environ 12 000 ans. Le gibier se raréfie. On chasse plus longtemps pour moins de résultat. Moins de nourriture : ou le partage reste égal et tout le groupe s’affaiblit, ou une sélection s’opère. Groupes plus petits, manque d’énergie, maladies. L’échappatoire, ce sont d’autres nourritures : céréales semées, animaux gardés. Nourrir plus de monde est un effet, compris après coup, pas le projet de départ. L’espérance de vie « autour de 25 ans » est un ordre de grandeur tiré vers le bas par la mort des enfants.</p>
+    <p><strong>Les femmes, hypothèse du cours.</strong> Avant la sédentarité, ceux qui ne suivent pas la chasse restent en arrière. Quand le gibier manque, les femmes, parce qu’elles ont des enfants à nourrir, passent des céréales sauvages (le blé) à la culture. Brasseul reprend l’idée : hommes à la chasse, femmes à la cueillette, puis à la plante. Avec les troupeaux près du camp, elles participent plus directement à la subsistance quotidienne. À présenter comme la thèse du cours, pas comme une loi prouvée.</p>
+    <p><strong>Chien et chat.</strong> Le chien, vers −12 000, est un compagnon de chasse : des tombes associent un chien et un humain. Le chat vient plus tard, avec les greniers, contre les rongeurs. Ce n’est pas le même moment ni le même motif.</p>
+    <p><strong>Le paradoxe de Sahlins.</strong> Dans <em>Âge de pierre, âge d’abondance</em>, les chasseurs-cueilleurs ne vivent pas dans un manque permanent. Construire des enclos, garder, moissonner et stocker prend plus de temps que tuer une bête et la manger. L’agriculture n’est donc pas adoptée parce qu’elle est plus facile. Il faut une contrainte, un choix, ou les deux.</p>
+    <p><strong>Braidwood, le choix culturel.</strong> Le Néolithique est une mutation déjà en germe dans le développement intellectuel. L’homme veut changer de vie. Deux preuves du cours : la sélection (le cochon issu du sanglier : on crée des espèces qui n’existaient pas ainsi) et l’espace (champs, villages, plus tard villes et routes). Avant les champs, il y a déjà une transmission : fabriquer les outils, distinguer les plantes qui se mangent. Une « école » au sens large.</p>
+    <p><strong>North.</strong> En Mésopotamie, vers −9000 / −8000 dans le cours, chaque paysan a son champ et reste dessus, parce qu’un champ quitté est un champ perdu. Pour la première fois, l’homme impose un milieu à la nature.</p>
+    <p><strong>La révolution sociale.</strong> On passe du camp au village. Le stock se vole, donc on le défend : le cours parle d’armées, puis de villages et de villes. Traces : pointes de flèches, squelettes blessés. Division du travail entre paysans et artisans, nouveaux métiers, hiérarchie, profit. Qui possède le stock n’est plus l’égal de qui n’a que ses bras. La maison se cloisonne. La spécialisation crée l’échange, puis la valeur.</p>
+  </div>
+  <div class="ok"><p><strong>Phrase de conclusion.</strong> Subi dans ses causes, voulu dans ses formes, le Néolithique fait passer l’humanité de la prédation à la production. C’est la première révolution économique, bien avant l’industrie. La nature continue d’imposer des contraintes, et les sociétés continuent de chercher des échappatoires.</p></div>
+  <div class="piege">
+    <p><strong>Ne pas écrire.</strong></p>
+    <ul>
+      <li>Méso = micro. Méso = milieu. Micro désigne les microlithes.</li>
+      <li>Que la famille ou la société n’existaient pas du tout avant.</li>
+      <li>Que Sahlins est « pour » l’agriculture. Il sert à montrer que le choix est énigmatique.</li>
+      <li>Que les pièces d’or, d’argent ou de bronze datent du Néolithique. La monnaie frappée apparaît en Lydie, au VIIe siècle avant notre ère. S’arrêter au troc et à la valeur.</li>
+      <li>Que les villes-États et les armées permanentes naissent en −8000. Chaîne : camp, village, stock, spécialisation, puis, au IVe millénaire, la révolution urbaine de Childe (cités, écriture).</li>
+      <li>Homo habilis et Homo erectus sur une page. Hors sujet. La bipédie est bien antérieure.</li>
+      <li>Que la théorie des oasis est « fausse » comme si le cours le disait. C’est la version classique de la contrainte. Dire qu’elle a été discutée ensuite.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="theme" id="t2">
+  <h2>Thème 2 — Comment une épidémie peut mettre à mal une économie</h2>
+  <p>Le cas est la peste du XIVe siècle, dans une crise plus large. La bonne copie ne s’arrête pas à « oui, c’est un désastre ».</p>
+  <div class="plan">
+    <p><strong>Problématique.</strong> La peste noire est-elle seulement une catastrophe qui interrompt la production, ou un choc qui bouleverse le travail, les inégalités et le rôle du pouvoir ?</p>
+    <p><strong>Plan.</strong></p>
+    <ol>
+      <li>Une crise générale : 1315-1317, 1347, 1370-1380, guerre, révoltes.</li>
+      <li>Caffa discuté, Tana et le commerce, puis les cinq effets immédiats.</li>
+      <li>Salaires, ordonnances contournées, Scheidel et Alfani (65 % à 50 %).</li>
+    </ol>
+  </div>
+
+  <h3>Définitions</h3>
+  <article class="def"><strong>Crise générale et séculaire</strong><p>Le XIVe siècle n’est pas une seule mauvaise année. C’est une crise longue, déclinée en crises particulières : 1315-1317, 1347, 1370-1380, plus la guerre. La prière du moine copiste les réunit : « De la faim, de la peste, de la guerre, libère-nous, Seigneur. »</p></article>
+  <article class="def"><strong>Crise de 1315-1317</strong><p>Crise de récolte due à des intempéries, limitée à l’Europe du Nord, avant la peste noire. Les corps affaiblis ouvrent la porte aux épidémies. Gilles Le Muisit, abbé de Saint-Martin de Tournai (1272-1353), décrit « des intempéries et une famine intense ». À Ypres, en 1316, environ un dixième de la population meurt en quelques mois.</p></article>
+  <article class="def"><strong>Peste noire</strong><p>Grande Peste à partir de 1347. Boccace, dans le <em>Décaméron</em>, décrit les bubons (aine, aisselle, membres) et une mort en environ trois jours. Survie inférieure à 0,5 % une fois le mal déclaré. Froissart : « la tierce partie du monde mourut ». Le monde, ici, c’est l’Europe. Quatorze retours jusqu’en 1415. Certaines villes perdent de la moitié aux neuf dixièmes de leurs habitants. Hambourg est cité vers 80 %, Paris vers la moitié. Les villages ne sont pas épargnés.</p></article>
+  <article class="def"><strong>Désastre économique immédiat</strong>
+    <p>Cinq effets, tous nés du même trou : beaucoup de gens meurent ou fuient, d’un coup.</p>
+    <ol>
+      <li><strong>La production chute.</strong> Les paysans qui semaient et moissonnaient sont morts ou ont quitté la terre. Un champ sans bras ne donne pas de récolte. L’offre de grain s’arrête parce que le travail qui la faisait a disparu.</li>
+      <li><strong>La demande chute.</strong> Les morts n’achètent plus rien. Les survivants, d’abord, se contentent de peu : ils ont peur, et ils enterrent les leurs. Moins de bouches, et des bouches moins exigeantes, donc moins de ventes.</li>
+      <li><strong>La masse monétaire par habitant augmente.</strong> Les pièces déjà en circulation ne disparaissent pas avec les morts. La même quantité de monnaie se partage entre beaucoup moins de gens. Chacun des vivants a donc, en moyenne, plus de monnaie en face de lui.</li>
+      <li><strong>Les rentes foncières baissent.</strong> La rente est le loyer du sol. Si le tenancier est mort ou si le champ est en friche, plus personne ne paie ce loyer. Le seigneur possède toujours la terre, mais elle ne lui rapporte plus.</li>
+      <li><strong>L’impôt se rétrécit.</strong> L’assiette, c’est le nombre de gens qui paient. Moins d’habitants, moins de feux, moins de recettes. Le roi cherche alors ailleurs, notamment dans les amendes.</li>
+    </ol>
+  </article>
+  <article class="def"><strong>Retournement de l’ordre social</strong>
+    <p>Avant la peste, les bras sont nombreux. Un ouvrier qui demande trop est remplacé. Après, ceux qui savaient moissonner, bâtir ou servir sont morts en masse. Il reste peu de gens pour le même travail, donc la concurrence entre eux disparaît.</p>
+    <p>Le maître ne choisit plus. C’est l’ouvrier qui choisit. S’il n’obtient pas ce qu’il demande, il part chez un autre, et le chantier ou la moisson reste en plan. Les salaires doublent ou triplent. On exige d’être payé en argent ou en une part de la récolte. On lâche le lard pour la viande fraîche, et parfois le vin, alors que cette table était celle des bourgeois et des seigneurs. La formule du cours résume le scandale vu d’en haut : « L’ouvrier réclame deux fois plus pour travailler trois fois moins. » Les élites n’y voient pas une loi du marché. Elles y voient un monde renversé, où le pauvre vit au-dessus de ce qu’on juge acceptable pour lui.</p>
+  </article>
+  <article class="def"><strong>Plafonnement</strong>
+    <p>Les rois et les officiers répondent en figeant le marché. Ils décident que les salaires et les prix doivent revenir à ce qu’ils étaient avant la peste. Un ouvrier valide doit accepter l’emploi qu’on lui propose à ce tarif. Il n’a pas le droit de partir chercher mieux ailleurs : la mobilité est limitée, sous peine d’amende. Donner l’aumône à quelqu’un qui peut travailler devient interdit, pour qu’on ne vive pas de la mendicité plutôt que du salaire bloqué.</p>
+    <p>Le but n’est pas d’abord de « faire repartir l’économie ». C’est de sauver l’ordre social. Un seigneur doit rester celui qui paie peu, et un ouvrier celui qui accepte. Si le salaire suit la rareté des bras, cet ordre se défait. Le plafonnement essaie de le recoudre par la loi. Il n’y parvient qu’en partie : on affiche l’ancien salaire, et l’on ajoute du blé à côté.</p>
+  </article>
+  <article class="def"><strong>Paiement en nature</strong>
+    <p>Le plafonnement interdit de payer plus que le salaire d’avant la peste. Le maître qui s’y tient n’a plus personne : l’ouvrier part. Les deux trouvent donc une parade qui ne contredit pas la lettre de la loi.</p>
+    <p>On inscrit dans l’acte, ou l’on dit à voix haute, le salaire autorisé, celui d’avant le choc. À côté, on ajoute du blé, une part de la moisson, ou une autre denrée. Le chiffre légal n’a pas bougé. Le revenu réel, lui, a monté, parce que le grain a une valeur. L’ouvrier est payé deux fois : une fois pour le juge, une fois pour vivre. Le cours y voit la preuve que les ordonnances échouent en partie. Elles affichent l’ancien monde. Elles ne le rétablissent pas.</p>
+  </article>
+  <article class="def"><strong>Nivellement</strong>
+    <p>Walter Scheidel, dans <em>The Great Leveler</em> (2017 ; en français <em>Une histoire des inégalités</em>, vers 2019), et Guido Alfani, qui précise le cas italien, soutiennent que les grandes mortalités resserrent les fortunes. La peste ne regarde pas le rang. Elle tue des riches et des pauvres. Surtout, elle raréfie le travail et abaisse les rentes : celui qui n’avait que ses bras pèse plus lourd, celui qui vivait du loyer du sol encaisse moins.</p>
+    <p>Le chiffre du cours : en Italie, la part de la richesse détenue par les 10 % les plus fortunés passe d’environ 65 % à 50 % vers 1350. Elle reste à peu près à ce niveau pendant deux siècles. Un décret florentin du 9 octobre 1348 dit la même chose vu d’en haut : beaucoup de citoyens sont devenus pauvres, et certains pauvres sont devenus riches. Ce n’est pas une société d’égaux. 50 %, ce n’est pas un partage. Les rois plafonnent les salaires justement pour faire cesser ce scandale. Ils n’effacent pas le fait démographique. La concentration des richesses ne repart vraiment qu’à partir du XVIe siècle.</p>
+  </article>
+
+  <h3>Ce qu’il faut savoir raconter</h3>
+  <div class="card">
+    <p><strong>Les trois pointes, à ne pas fondre.</strong> Le XIVe siècle n’est pas une seule mauvaise année. C’est une crise longue, avec des pics qu’il faut garder distincts. Les coller tous sur 1348, c’est rater le sujet, parce que chaque pic a sa cause, sa région et sa suite.</p>
+    <p>La première pointe, 1315-1317, n’est pas la peste. Ce sont des intempéries exceptionnelles et une famine, et seulement en Europe du Nord. Le Sud n’est pas touché de la même façon. Gilles Le Muisit, à Tournai, décrit ces pluies et cette faim. Les corps affaiblis ouvrent déjà la porte aux maladies. À Ypres, en 1316, environ un dixième de la population meurt en quelques mois. Trente ans avant 1347, le Nord est donc déjà vidé et fragile.</p>
+    <p>La deuxième pointe, 1347-1350, est la peste noire. Boccace décrit les bubons et une mort en trois jours. Une fois le mal déclaré, moins de 0,5 % survivent. Froissart parle d’un tiers du monde, c’est-à-dire de l’Europe. Paris perd environ la moitié de ses habitants, Hambourg environ 80 %. Elle ne s’arrête pas à cette vague. Quatorze retours suivent jusqu’en 1415, chacun avec son cortège de morts. Les paysans quittent les terres. Un champ abandonné ne nourrit plus personne, et la faim fait alors d’autres victimes, en ville comme dans les villages.</p>
+    <p>La troisième pointe, 1370-1380, frappe cette fois le sud de l’Europe. C’est d’abord une disette. Les corps sont de nouveau faibles, et la peste en profite pour revenir. Les révoltes qui suivent vont plus loin que la Jacquerie de 1358, déjà brève et déjà suivie d’une répression d’environ 20 000 morts, puis elles sont écrasées. À ces trois pointes s’ajoute la guerre de Cent Ans. Avec la faim et la peste, elle est le troisième fléau. Le siècle se lit comme une crise générale qui se décline, pas comme un accident unique.</p>
+    <p><strong>La chasse aux coupables.</strong> Après le choc, chacun cherche un responsable. Les riches reprochent aux pauvres d’avoir répandu le mal. Les pauvres reprochent aux riches de ne penser qu’à eux, de fuir et d’accaparer. L’accusation tombe sur les juifs : pogroms, synagogues détruites. La peste s’ajoute à la faim et à la guerre. Elle ne cause pas mécaniquement chaque révolte. Elle donne un visage à une colère déjà là.</p>
+    <p><strong>Jacquerie, 1358.</strong> Le nom vient de l’habit du paysan, « Jacques ». Le mouvement est bref, trois à quatre semaines, autour de Paris, sur l’équivalent d’une quinzaine de départements. Les Jacques tuent et torturent plusieurs centaines de personnes. La répression en tue environ 20 000. Au même moment, Étienne Marcel agit à Paris. La colère est courte. La punition est disproportionnée : elle enlève encore des bras, donc encore de la production.</p>
+    <p><strong>Caffa, à démonter.</strong> Port de Crimée, 1346, siège par les Mongols de Djanibeg. Le récit dit qu’ils catapultent des cadavres, que le mal gagne la ville, et que des navires génois et vénitiens l’emportent, sans quarantaine efficace. La source est unique, indirecte, connue par une copie tardive : Gabriele de’ Mussi, notaire italien. On a tenu ce récit pour vrai jusqu’aux années 2000 parce qu’il concentre les peurs : l’étranger, la guerre, le navire. La peste se transmet par les puces, qui quittent le corps dès la mort. Des cadavres catapultés ne portent plus le vecteur. Ce siège n’explique donc pas l’arrivée du mal.</p>
+    <p><strong>Tana, l’autre hypothèse.</strong> Épidémie à Tana, aujourd’hui Azov, dès 1345, un an avant Caffa. Le trafic est dense entre Gênes, Venise et Tana. La peste entrerait par le commerce, en temps de paix, pas par le siège. Accuser Caffa, c’est accuser la guerre et l’étranger. Admettre Tana, c’est admettre que les marchands transportent le fléau. Le récit de Caffa dit nos peurs. L’hypothèse de Tana dit nos échanges. Un consensus étroit reste : des navires partis de la mer Noire arrivent en Italie avec des hommes infectés.</p>
+    <p><strong>Le fisc anglais, chiffre à écrire tel quel.</strong> 3,8 millions d’habitants avant la peste, 1,7 million de morts, donc environ 2,1 millions ensuite. Moins de feux, moins d’impôts, donc des amendes pour renflouer le trésor. D’autres historiens partent plus haut : on le présente comme le chiffre du cours. Le nom entendu « R. Beard » ou « R. Brard » correspond vraisemblablement à Robert Braid. On apprend les cinq effets. On n’invente pas une citation. Il faut plus de deux siècles et demi pour retrouver la population.</p>
+    <p><strong>Les voix du scandale.</strong> Le chroniqueur de Rochester, dont l’identité n’est pas sûre, constate la hausse du pain, du blé et des légumes. Les ouvriers peuvent quand même acheter, parce que leur salaire a monté plus vite que ces prix. Henry Knighton, chanoine augustinien de Leicester, voit le salaire des moissonneurs doublé ou triplé, payé en argent ou en nature. William Langland (1332-1386), dans <em>Pierre le laboureur</em>, pas « Peine », décrit le passage du lard à la viande fraîche, table des bourgeois et des nobles. John Gower (1330-1402), pas « Gowen », écrit : « Les classes laborieuses exigent pour leur ventre ce qu’exige un seigneur. » Fromage, lait et vin, qui étaient un festin ou une boisson de seigneur, deviennent ordinaires. « Ces bons vieux temps sont anéantis. » Ils sont « rares, avares et oisifs ». S’ils n’obtiennent pas leurs conditions, ils partent. Gower va jusqu’à dire que les seigneurs devront se soumettre, à moins d’obtenir justice par la force. Des femmes reprennent aussi l’activité du mari mort. La formule du scandale, vue d’en haut, tient en une ligne : deux fois plus pour travailler trois fois moins.</p>
+    <p><strong>Les décisions.</strong> En Provence, en 1348, le sénéchal Raymond d’Agoult voit les moissonneurs demander plus que la valeur du blé récolté. Il bloque les prix de 16 types de chaussures, 14 variétés de vêtements, 9 espèces de volaille et 15 coupes de viande. Il limite le nombre d’embauches. Se réunir pour négocier un salaire coûte la main coupée. En Angleterre, Édouard III, en juin 1349, ramène les gages à ceux de 1346, oblige à accepter l’emploi, rétablit les prix d’avant la peste et interdit de donner à un valide qui mendie. Le Statut de 1351, puis le Statut de Cambridge en 1388, ordonnent de rester dans son secteur agricole, sous peine d’amendes. Deux buts : des bras dans chaque région, et renflouer le trésor. L’information circule mal. Beaucoup sont condamnés sans avoir su la règle. En France, Jean II le Bon : l’ordonnance à retenir est datée de 1354. Le préambule dit qu’on peut vivre en ne travaillant que deux jours par semaine, le reste à la taverne. Les historiens citent souvent le 30 janvier 1351, pour la vicomté de Paris. En copie, on suit 1354. Partout, la parade est la même : on affiche l’ancien salaire, et l’on ajoute du blé. La loi tient sur le papier. Le revenu, non.</p>
+    <p><strong>Le décret florentin du 9 octobre 1348.</strong> « Alors que beaucoup de citoyens étaient devenus pauvres, certains pauvres étaient devenus riches. » Les rois plafonnent pour faire cesser ce scandale. Ils n’effacent pas le fait : moins d’hommes, plus de terre par survivant, plus de pouvoir pour qui travaille. Walter Scheidel et Guido Alfani chiffrent le resserrement : en Italie, les 10 % les plus riches passent d’environ 65 % à 50 % de la richesse vers 1350, pour environ deux siècles. Ce n’est pas l’égalité. La concentration remonte du XVIe au XVIIIe siècle.</p>
+  </div>
+  <div class="ok">
+    <p><strong>Phrase de conclusion.</strong> La peste détruit d’abord. Moins de bras, donc moins de blé. Moins d’acheteurs, donc une demande qui tombe. Une terre vide ne paie plus de rente, et moins de feux veulent dire moins d’impôts. En Angleterre, on passe de 3,8 millions d’habitants à environ 2,1 millions. Il faut plus de deux siècles et demi pour retrouver le niveau. Ce vide renverse ensuite l’échelle des revenus. Ceux qui restent sont rares : Knighton voit les salaires doubler ou tripler, Langland la viande fraîche, Gower l’ouvrier qui exige la table du seigneur. Les rois répondent par la loi, Édouard III en juin 1349, Jean II en 1354, mais le blé ajouté au salaire légal montre que l’ordre ancien ne revient pas. Scheidel et Alfani mesurent le resserrement, d’environ 65 % à 50 % pour les plus riches, sans en faire l’égalité. Avec la faim de 1315 et de 1370, et avec la guerre de Cent Ans, la peste transforme la fin du Moyen Âge : catastrophe d’abord, puis un marché du travail que le pouvoir doit réguler.</p>
+  </div>
+  <div class="piege">
+    <p><strong>Ne pas écrire.</strong></p>
+    <ul>
+      <li><strong>0,05 % de survie.</strong> Une fois le mal déclaré, moins de 0,5 % survivent. Le zéro en trop divise le chiffre par dix.</li>
+      <li><strong>Caffa comme un fait.</strong> Gabriele de’ Mussi est une source unique et tardive. Les puces quittent le mort, donc les cadavres catapultés en 1346 ne portent plus le mal. Tana, dès 1345, fait entrer la peste par le commerce.</li>
+      <li><strong>Une seule date pour tout le siècle.</strong> 1315-1317, famine du Nord, Ypres environ un dixième. 1347-1350, peste noire, quatorze retours jusqu’en 1415. 1370-1380, disette du Sud, puis révoltes écrasées.</li>
+      <li><strong>Le pain cher appauvrit l’ouvrier.</strong> Rochester voit le pain, le blé et les légumes monter, et l’ouvrier acheter quand même, parce que son salaire a monté plus vite.</li>
+      <li><strong>Les ordonnances ont réussi.</strong> On affiche le salaire d’avant la peste et l’on ajoute du blé. Agoult coupe la main pour la négociation. Cambridge, en 1388, retient les bras. La loi tient sur le papier, pas dans le revenu.</li>
+      <li><strong>Scheidel prouve la fin des classes.</strong> 50 % de la richesse pour les 10 % les plus riches, ce n’est pas un partage. Florence, le 9 octobre 1348, constate des pauvres devenus riches. La concentration remonte du XVIe au XVIIIe siècle.</li>
+      <li><strong>Les noms faux.</strong> <em>Pierre le laboureur</em>, pas « Peine ». John Gower, pas « Gowen ». « Beard » ou « Brard » vise vraisemblablement Robert Braid : on apprend les cinq effets, on n’invente pas sa citation.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="theme" id="t3">
+  <h2>Thème 3 — La population française sous l’Ancien Régime</h2>
+  <p>Surtout les XVIe-XVIIIe siècles, avec un régime encore lisible vers 1740. La conclusion du cours tient en trois abandons.</p>
+  <div class="plan">
+    <p><strong>Problématique.</strong> Cette population est-elle une masse stagnante, nombreuse dans ses foyers et universellement mariée, ou un régime jeune, rural, à croissance lente, réglé par le mariage tardif et la mort ?</p>
+    <p><strong>Plan.</strong></p>
+    <ol>
+      <li>De 15-18 millions vers 1500 à environ 22 millions vers 1740, avec des cassures de 2 à 3 millions.</li>
+      <li>80 % de ruraux, densités, migrations, pyramide 40 / 50 / 9, ménage de 4,5.</li>
+      <li>Malthus, Bideau, 280 pour 1 000, débat Goubert-Meuvret contre Chaunu-Baehrel.</li>
+    </ol>
+    <p><strong>Les trois phrases à placer.</strong> Abandonner la stagnation. Abandonner les ménages très nombreux. Abandonner le mariage universel.</p>
+  </div>
+
+  <h3>Définitions</h3>
+  <article class="def"><strong>Feu</strong><p>Une maison qui fume est un feu. On multiplie le nombre de feux par environ 4 pour passer des maisons aux habitants, et c’est pour cela que les effectifs du cours sont des fourchettes, pas un chiffre unique.</p></article>
+  <article class="def"><strong>Niveaux de population, chiffre du cours</strong><p>La France rattrape d’abord le niveau d’avant 1350 : vers 1500, on compte 15 à 18 millions d’habitants. Vers 1600, on est entre 16 et 20 millions, vers 1700 autour de 21, et vers 1740 autour de 22. C’est ce 22 qu’il faut écrire. L’INED reconstitue environ 24,6 millions en 1740 sur le territoire actuel : on le cite, on ne le substitue pas.</p></article>
+  <article class="def"><strong>Croissance heurtée</strong><p>La population augmente sur le long terme, mais une épidémie ou une disette peut emporter 2 à 3 millions de personnes en 3 ou 4 ans, puis le niveau se stabilise. On ne se projette donc pas : prévoir les effectifs de l’année suivante est presque un anachronisme, et cette incertitude change la décision économique.</p></article>
+  <article class="def"><strong>Densité</strong><p>Vers 1700, le royaume n’est pas plein partout. On dépasse 80 à 90 habitants au km² autour de Lille, Amiens, Rouen, Alençon, Caen, Paris et leurs campagnes. On tombe sous 40 en Sologne, à cause d’environ 1 500 étangs, en Poitou à cause des marais, en Provence à cause des pillages venus de la mer, en Alsace parce que la frontière est presque toujours en guerre, et dans les Alpes. Le reste du royaume se tient entre 40 et 60.</p></article>
+  <article class="def"><strong>Rural et urbain</strong><p>Quatre habitants sur cinq vivent à la campagne, soit 80 %, et un sur cinq en ville. Ce cinquième urbain va du bourg de quelques centaines d’habitants à la grande ville, donc « urbain » ne veut pas dire Paris. La France n’atteint 50 % d’urbains que vers 1938, environ un siècle et demi après l’Angleterre, qui passe ce seuil au début du XIXe siècle.</p></article>
+  <article class="def"><strong>Pyramide de 1740</strong><p>En 1740, 40 % des habitants ont moins de 20 ans, contre moins de 25 % aujourd’hui. Les adultes de 20 à 60 ans font 50 %, et les 60 ans et plus seulement 9 %, contre environ 25 % aujourd’hui. C’est une population jeune : les vieux sont une minorité, et l’on n’écrit pas une France de vieillards.</p></article>
+  <article class="def"><strong>Sexe</strong><p>À la naissance, on compte environ 511 garçons pour 500 filles. La mort de 0 à 1 an, plus forte chez les garçons, rééquilibre les deux sexes. L’équilibre tient jusque vers 50 ans, parce que les accidents du travail tuent des hommes et les accouchements tuent des femmes. Après 50 ans, les femmes sont plus nombreuses.</p></article>
+  <article class="def"><strong>Ménage</strong><p>Le ménage courant est une famille conjugale : les parents et les enfants mineurs. Dans le Sud, ces noyaux s’élargissent. On compte environ 4,5 personnes sous le même toit. Le ménage est complexe, avec des demi-frères, des orphelins et des neveux, mais il n’est pas nombreux. À Rouen, 35 % des ménages sont des célibataires : c’est une ville, pas la moyenne du royaume.</p></article>
+  <article class="def"><strong>Mariage tardif</strong><p>Se marier tard, c’est attendre d’avoir de quoi fonder un foyer. La terre est déjà prise, donc Alain Bideau le dit : on s’installe surtout à la mort du père. En attendant, le fils et sa compagne peuvent vivre ensemble, sans mariage et sans enfant. Le cadet, lui, n’hérite pas : il reste célibataire sur l’exploitation, entre dans les ordres, ou entre dans l’armée. À la fin du XVIIe siècle, les garçons ont environ 27 ou 28 ans, les filles des villes 25 ou 26. Le Sud marie plus tôt. L’aristocratie aussi, parfois des mineurs, parce qu’il faut un héritier. Malthus, pas « Mastus », y voit le frein : on ne met pas au monde des enfants que l’on ne peut pas nourrir. La ménopause arrive vers 40 ans. Une femme mariée à 25 ans n’a donc qu’environ quinze ans devant elle. L’allaitement bloque l’ovulation environ deux ans, et le cours compte environ sept naissances, dont les épidémies n’en laissent survivre que quelques-unes. On se marie tard, et l’on n’a pas pour autant une famille immense.</p></article>
+  <article class="def"><strong>Célibat définitif</strong><p>Le célibat définitif, c’est ne jamais se marier. Il passe d’environ 7 % vers 1660-1664 à 8,5 % vers 1720-1724, puis à environ 10 % à la veille de la Révolution. Ce n’est pas un choix de confort : sans terre, on ne fonde pas de foyer. Ce chiffre interdit d’écrire un royaume où chacun se marie.</p></article>
+  <article class="def"><strong>Endogamie</strong><p>L’endogamie, c’est épouser quelqu’un de son cercle. On se marie souvent à 1,5 ou 2 km, dans la paroisse de la future épouse. Environ 70 % de la population vit dans des paroisses de moins de 1 200 habitants, donc le choix est petit. Entre 1740 et 1789, 68 % des mariages unissent deux habitants de la même paroisse. Le jour est surveillé aussi. L’Église interdit les noces pendant l’Avent et le Carême, et l’on n’interrompt pas les moissons ni les vendanges. Au XVIIe siècle, 65 % des mariages ont lieu le lundi et 24 % le mardi. Le conjoint et la date ne sont pas libres.</p></article>
+  <article class="def"><strong>Homogamie</strong><p>L’homogamie, c’est épouser quelqu’un de la même qualité et de la même condition. Les familles l’imposent, et le regard du milieu punit celui qui sort de son rang. Depuis le Moyen Âge, les artisans d’une même rue se marient entre eux pour garder le savoir-faire. C’est la règle, pas l’exception. La condition se reproduit parce que le mariage ne mélange pas les groupes.</p></article>
+  <article class="def"><strong>Hypergamie</strong><p>L’hypergamie, c’est monter par le mariage. Une servante épouse le maître veuf, ou la fille d’un riche bourgeois épouse un noble désargenté et entre dans la noblesse. C’est une transgression de l’homogamie, pas la règle. La servante devenue maîtresse garde souvent les manières de son milieu d’origine : le mariage change le titre plus que les habitudes.</p></article>
+  <article class="def"><strong>Mortalité ordinaire</strong><p>La mortalité ordinaire, c’est la mort d’une année sans crise. On compte environ 30 décès pour 1 000 habitants, contre environ 9 pour 1 000 aujourd’hui. Elle se voit d’abord chez les enfants, et elle dépend du rang. À Chartres, les chanoines, nourris et chauffés, meurent vers 72 ans, les salariés vers 49. On baptise le jour même, parce que l’enfant mort sans baptême n’est pas sauvé. Philippe Ariès le dit : il n’y a pas d’enfant roi, puisqu’on n’est sorti d’affaire que vers 15 ans.</p></article>
+  <article class="def"><strong>Mortalité infantile</strong><p>La mortalité infantile compte les morts de 0 à 1 an. Entre 1740 et 1789, 280 nouveau-nés sur 1 000 meurent, soit 28 %, contre 8 à 9 pour 1 000 aujourd’hui. Avec une épidémie, la mort avant 15 ans peut atteindre 70 %. Pierre Goubert en tire la formule : « il fallait deux enfants pour faire un adulte ». Le rang change encore ce chiffre. Dans le Thymerais, entre 1785 et 1791, sur 1 000 enfants, 597 vivent encore à 15 ans chez les laboureurs, et 515 chez les journaliers.</p></article>
+  <article class="def"><strong>Mort endogène</strong><p>La mort endogène vient de la naissance elle-même, pas d’une maladie attrapée plus tard. L’accouchement dure trop longtemps, l’enfant meurt étouffé, ou le tétanos ombilical le prend parce que les mains ne sont pas propres. L’accouchement est aussi la première cause de mort des femmes. L’homme se remarie vite, parfois en quelques semaines, souvent avec une femme de 20 à 25 ans. La veuve, à 45 ou 50 ans et avec des enfants, trouve peu : un nouveau mari ne veut pas élever les enfants d’un autre.</p></article>
+  <article class="def"><strong>Mort exogène</strong><p>La mort exogène vient du dehors, une fois l’enfant né. Diarrhée du nourrisson, sevrage au lait de vache, froid, accidents. À la campagne, le cochon, le loup et l’incendie tuent. Chez la nourrice, surtout pour un enfant abandonné, on cite jusqu’à 90 % de décès. C’est un exemple oral, pas la moyenne de tous les nourrissons.</p></article>
+  <article class="def"><strong>Mortalité extraordinaire</strong><p>La mortalité extraordinaire, c’est la mort d’une année de crise. Les sépultures sont multipliées par 4 ou 5, les mariages s’effondrent et les naissances baissent, parce qu’on n’a plus de quoi fonder un foyer ni nourrir un enfant. La flambée dure de 6 mois à 2 ans. Elle vient d’une épidémie, ou d’une crise de subsistances. Ce n’est plus le rythme ordinaire de 30 pour 1 000.</p></article>
+  <article class="def"><strong>Crise de subsistance</strong><p>Goubert et Meuvret expliquent la famine par le grain. Un été pourri donne une récolte faible, le prix monte, et le pain est l’aliment principal, parfois exclusif, des deux tiers de la population. Les riches achètent encore. Les pauvres empruntent un an. Si l’année suivante est mauvaise, plus personne ne leur prête. La disette devient alors la famine, et la mort extraordinaire suit.</p></article>
+  <article class="def"><strong>Légende noire de la famine</strong><p>Pierre Chaunu et René Baehrel, en 1962, pas « Bacherel », refusent l’idée qu’on meurt le ventre vide. La côte, le bocage et la forêt fournissent encore du poisson, de l’élevage, des châtaignes, des champignons et le produit du braconnage. On mange moins, les corps s’affaiblissent, et ce sont les épidémies qui tuent. On raconte les deux chaînes, celle du pain et celle de l’infection. On n’écrit pas que Goubert a menti.</p></article>
+
+  <h3>Ce qu’il faut savoir raconter</h3>
+  <div class="card">
+    <p><strong>Pourquoi les régions vides le sont.</strong> Tomber sous 40 habitants au km² n’est pas un hasard. En Provence, les pillages venus de la mer vident le rivage. En Camargue, les moustiques rendent le séjour malsain. L’Alsace est une frontière, presque toujours en guerre. Le Poitou est un pays de marais. La Sologne compte environ 1 500 étangs, et il reste peu de terre cultivable. On n’y reste pas, parce que la terre ne nourrit pas.</p>
+    <p><strong>Villes, vers 1700.</strong> Le royaume est un semis de tout petits bourgs. Vers 1720, dans le Bassin parisien, la moitié des communautés compte moins de 200 feux, soit moins de 800 habitants. Vingt villes seulement dépassent 30 000 habitants. Vannes en a 6 000, Lorient 10 000 à 11 000, Rennes 40 000, et c’est déjà la plus grande ville bretonne. Nantes atteint 80 000 au début du XVIIIe siècle, Paris 530 000. La paroisse, pas la ville, est la grille du peuplement : aujourd’hui encore, le Morbihan compte environ 260 communes et 300 paroisses.</p>
+    <p><strong>Migrations.</strong> On part parce que la terre du lieu ne suffit pas. Le départ définitif existe déjà : domestiques et nourrices vont vers le Bassin parisien. Les Finistériens sont recherchés à table, parce qu’ils parlent breton et ne comprennent pas le français. Des jeunes femmes partent pour une dot, et une partie glisse vers la prostitution. Le départ saisonnier envoie les hommes de la montagne vers les ports, pendant que les pêcheurs sont en mer. Mendiant, colporteur, déserteur et berger circulent en permanence, et on les voit mal. Le compagnon du devoir, lui, va de ville en ville pour apprendre le métier. La guerre, la crise et la religion déplacent aussi : les dragonnades logent des troupes chez les protestants pour forcer la conversion.</p>
+    <p><strong>La terre commande le mariage.</strong> Alain Bideau le dit : seuls ceux qui peuvent s’installer, le plus souvent à la mort du père, accèdent au mariage. En attendant, le fils et sa compagne peuvent vivre ensemble, sans mariage et sans enfant. Le cadet a trois issues : rester célibataire sur l’exploitation, entrer dans les ordres, ou entrer dans l’armée. L’homme a en général un à cinq ans de plus que sa femme. L’Église désapprouve ce retard, parce qu’elle y voit un encouragement au péché de chair. Chez les paysans, un enfant né hors mariage n’a pas la même conséquence que chez les nobles, où un enfant caché menace l’héritage. Quand on ne peut pas aller déposer l’enfant en ville, il reste l’abandon, et parfois l’infanticide.</p>
+    <p><strong>Le calendrier du mariage.</strong> L’Église interdit d’épouser un parent jusqu’au quatrième degré, celui des cousins germains, sauf dispense. Elle interdit aussi les noces pendant l’Avent et le Carême. On ne se marie pas au moment des moissons ni des vendanges : les mois libres sont surtout janvier et février. Pas le vendredi, jour de la mort du Christ, pas le dimanche, pas le samedi pris entre les deux. Au XVIIe siècle, 65 % des mariages ont lieu le lundi et 24 % le mardi. Le métier surveille aussi : depuis le Moyen Âge, les artisans d’une même rue se marient entre eux pour garder le savoir-faire. La noblesse se marie par étage. Les rois, eux, vont chercher loin.</p>
+    <p><strong>Remariage.</strong> L’accouchement est la première cause de mort des femmes. L’homme se remarie vite, parfois en quelques semaines, souvent avec une femme de 20 à 25 ans, parce qu’il lui faut quelqu’un pour la maison et les enfants. La veuve attend plus longtemps. À 45 ou 50 ans, avec des enfants, elle trouve peu : un nouveau mari ne veut pas élever les enfants d’un autre.</p>
+    <p><strong>Combien d’enfants, et pourquoi pas plus.</strong> La ménopause arrive vers 40 ans. Mariée à 25 ans, une femme n’a qu’environ quinze ans. L’allaitement bloque l’ovulation environ deux ans, et le cours compte environ sept naissances, dont les épidémies n’en laissent survivre que quelques-unes. D’autres freins raccourcissent encore : la stérilité, souvent dite du côté de l’homme, l’accouchement qui blesse, l’avortement, les infections, la mort d’un conjoint au bout d’environ quinze ans, les chambres séparées, le coït interrompu, et les préservatifs, d’abord liés aux soldats et à la prostitution. La femme du peuple se relève le lendemain. Dans la noblesse, on reste quelques jours au lit, puis l’enfant part chez la nourrice.</p>
+    <p><strong>Illégitimes.</strong> On n’écrit pas 0,01 %. Le contraste du cours suffit : les naissances hors mariage sont très faibles dans les paroisses rurales, et nettement plus hautes en ville, où l’abandon gonfle les chiffres. Un ordre de 12 % y est cité. À l’extérieur, on est autour de 1 % en 1740-1749 et de 2 % vers 1780. La ville compte des enfants déposés. La campagne, non.</p>
+    <p><strong>La misère est mortifère.</strong> À Chartres, les chanoines, nourris et chauffés, meurent vers 72 ans. Les salariés de la ville meurent vers 49 ans. Vingt-trois ans les séparent, à métier et à table près. Dans le Thymerais, près de Chartres, entre 1785 et 1791, sur 1 000 enfants de laboureurs, 597 vivent encore à 15 ans. Sur 1 000 enfants de journaliers, 515. Philippe Ariès en tire qu’il n’y a pas d’« enfant roi » quand la mort est partout. Louis XIV meurt à 76 ans, Voltaire à 84, Fontenelle est centenaire : ce sont des exceptions, pas la règle. Entre 20 et 29 ans, on enterre plus de femmes que d’hommes, à cause des couches. Après 15 ans, les plus robustes peuvent espérer aller vers 40 ans.</p>
+    <p><strong>Comment trancher Goubert et Chaunu.</strong> Le cours ne choisit pas un camp chiffré. Il demande de lire les deux et de savoir d’où chacun parle. Goubert et Meuvret, liés au Parti communiste, assombrissent l’Ancien Régime et font mourir de faim. Chaunu et Baehrel refusent cette noirceur et mettent l’épidémie au centre. Un auteur a une orientation, et un seul livre ne suffit pas. On n’écrit pas que Goubert a menti.</p>
+    <p><strong>La médecine n’enraye pas ce régime.</strong> Vers 1786, on compte environ 2 000 médecins, formés sans vraie expérimentation. Louis XIV subit saignées et purges. Les chirurgiens se séparent à peine des barbiers. Sa fistule est opérée en 1686 sans anesthésie. Les chirurgiens de l’époque napoléonienne se vanteront d’amputer une jambe en une minute et demie, toujours sans anesthésie. Le vrai changement attend le XIXe siècle. Avant, la médecine ne renverse ni les 280 pour 1 000, ni les crises.</p>
+    <p><strong>Chasse aux sorcières.</strong> Elle frappe surtout au XVIe siècle, quand les femmes de plus de 50 ans deviennent plus nombreuses. On accuse des femmes âgées, seules, veuves, détentrices d’un savoir. Environ 85 % des procès les concernent. Les hommes jugés, environ 15 %, sont souvent proches d’elles. La peur cherche une coupable dans celles qui restent.</p>
+    <p><strong>Fécondité chiffrée à connaître.</strong> Les trois quarts des femmes ont, par l’allaitement, une aménorrhée d’environ deux ans. Le couple dure en moyenne une quinzaine d’années. On se marie tard, vers 30 ans pour beaucoup d’hommes, et l’union est courte parce que l’un des deux meurt. Sept naissances ne font donc pas sept adultes.</p>
+  </div>
+  <div class="ok"><p><strong>Phrase de conclusion.</strong> La population passe de 15 à 18 millions vers 1500 à environ 22 millions vers 1740. La hausse est réelle, mais une crise peut emporter 2 à 3 millions de personnes en quelques années, donc on ne se projette pas. Quatre habitants sur cinq restent ruraux, le ménage compte environ 4,5 personnes, et l’on se marie tard parce que la terre manque. On baptise le jour de la naissance, et 280 nouveau-nés sur 1 000 meurent avant un an. On ne produit pas la même économie qu’une population sûre de ses effectifs.</p></div>
+  <div class="piege">
+    <p><strong>Ne pas écrire.</strong></p>
+    <ul>
+      <li><strong>0,01 % d’illégitimes.</strong> Très faible à la campagne, plus haut en ville à cause de l’abandon, un ordre de 12 % y est cité. À l’extérieur, environ 1 % puis 2 %.</li>
+      <li><strong>« Mastus » et « Bacherel ».</strong> Malthus pour le frein des noces. René Baehrel, en 1962, avec Pierre Chaunu, pour les épidémies sur des corps faibles.</li>
+      <li><strong>Anne de Bretagne, « mariée à 12 ans, 8 enfants puis 7 ».</strong> Elle est née en 1477 et mariée vers 14 ans. Plusieurs enfants meurent. Avec Louis XII, deux filles survivent : Claude et Renée. Même une reine enterre presque toute sa descendance.</li>
+      <li><strong>Les 35 % de Rouen comme moyenne du royaume.</strong> C’est une ville. Le célibat définitif du royaume tourne autour de 10 % en 1789.</li>
+      <li><strong>La génétique du Finistère et de Crozon comme preuve médicale.</strong> Un exemple d’endogamie géographique suffit : 68 % des mariages dans la même paroisse.</li>
+      <li><strong>Stagnation, maisonnées de dix, mariage de tous.</strong> On écrit 22 millions en 1740, un ménage de 4,5, et un célibat qui monte jusqu’à environ 10 %.</li>
+      <li><strong>« Goubert a menti parce qu’il était communiste ».</strong> On expose les deux modèles : la faim chez Goubert et Meuvret, l’épidémie chez Chaunu et Baehrel.</li>
+      <li><strong>24,6 millions à la place de 22.</strong> En copie : « le cours retient environ 22 millions ». L’INED, 24,6 sur le territoire actuel, se cite, il ne se substitue pas.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="chiffres">
+  <h2>Chiffres, par thème</h2>
+  <p class="lead">Chaque nombre sert une idée. On ne le pose pas seul.</p>
+  <h3>Néolithique</h3>
+  <div class="table-scroll"><table>
+    <thead><tr><th>Repère</th><th>Chiffre</th><th>Ce que ça renforce</th></tr></thead>
+    <tbody>
+      <tr><td>Météo</td><td>environ 72 h</td><td>La météo se prévoit à court terme. Sans ces 72 h, l’assèchement de Brasseul ne serait qu’une mauvaise semaine, pas un climat.</td></tr>
+      <tr><td>Brasseul</td><td>vers −12 000, Kurdistan / Irak</td><td>L’assèchement a un lieu et une date. Le gibier manque, les groupes s’épuisent, et la contrainte précède le choix d’agriculture.</td></tr>
+      <tr><td>Oasis</td><td>−9000 à −8000</td><td>Childe, d’après Pumpelly : l’aridité rassemble hommes, bêtes et plantes près de l’eau, et la domestication suit cette promiscuité.</td></tr>
+      <tr><td>Chien</td><td>vers −12 000</td><td>Il chasse avec les hommes, avant le stock et la ferme. Le chat, lui, n’arrive qu’avec les greniers.</td></tr>
+      <tr><td>Espérance de vie</td><td>autour de 25 ans</td><td>La mort des enfants tire le chiffre vers le bas. La population plus nombreuse vient après, quand la nourriture est plus sûre.</td></tr>
+      <tr><td>Monnaie et cités</td><td>Lydie, VIIe siècle ; villes au IVe millénaire</td><td>On compare encore des poteries et un mouton. La pièce frappée et les cités-États n’existent pas en −8000.</td></tr>
+    </tbody>
+  </table></div>
+  <h3>Peste</h3>
+  <div class="table-scroll"><table>
+    <thead><tr><th>Repère</th><th>Chiffre</th><th>Ce que ça renforce</th></tr></thead>
+    <tbody>
+      <tr><td>Ypres</td><td>1316, environ 1/10</td><td>La faim de 1315-1317, seulement au Nord, tue déjà un dixième à Ypres. Les corps sont faibles trente ans avant la peste.</td></tr>
+      <tr><td>Tana / Caffa</td><td>1345, puis 1346</td><td>Tana commerce avec Gênes et Venise un an avant le siège de Caffa. Les puces quittent les morts : les cadavres catapultés ne prouvent pas l’arrivée du mal.</td></tr>
+      <tr><td>Peste</td><td>1347, moins de 0,5 %, 14 retours jusqu’en 1415</td><td>Une fois le mal déclaré, presque personne ne survit, et quatorze retours creusent le trou jusqu’en 1415. Ce n’est pas une seule année.</td></tr>
+      <tr><td>Froissart, villes</td><td>un tiers ; Paris vers 50 %, Hambourg vers 80 %</td><td>Froissart dit un tiers de l’Europe. Paris et Hambourg donnent l’ordre de grandeur, pas un pourcentage unique à recopier partout.</td></tr>
+      <tr><td>Angleterre</td><td>3,8 millions, 1,7 million de morts</td><td>Il reste environ 2,1 millions. Moins de feux, moins d’impôts, donc des amendes. C’est le chiffre du cours : d’autres partent plus haut.</td></tr>
+      <tr><td>Jacquerie</td><td>1358, environ 20 000 morts</td><td>Le mouvement dure trois à quatre semaines et tue quelques centaines. La répression, environ 20 000 morts, enlève encore des bras.</td></tr>
+      <tr><td>Agoult</td><td>1348, 16, 14, 9 et 15 prix</td><td>Les moissonneurs demandent plus que le blé récolté. Agoult bloque ces prix et coupe la main à qui se réunit pour négocier un salaire.</td></tr>
+      <tr><td>Rois</td><td>juin 1349, 1354 dans le cours, 1388</td><td>Édouard III fige les gages de 1346. Jean II, en copie, c’est 1354, le texte conservé étant du 30 janvier 1351 pour Paris. Cambridge retient les bras. On affiche l’ancien salaire et l’on ajoute du blé.</td></tr>
+      <tr><td>Top 10 %</td><td>65 % puis 50 %, vers 1350</td><td>Scheidel et Alfani mesurent un resserrement, pas un partage. Florence, le 9 octobre 1348, voit des pauvres devenus riches. La concentration remonte du XVIe au XVIIIe siècle.</td></tr>
+      <tr><td>Population d’avant</td><td>plus de deux siècles et demi</td><td>Les salaires montent tout de suite. Retrouver le nombre d’habitants d’avant prend plus de deux siècles et demi. Le rebond ne nie pas le trou.</td></tr>
+    </tbody>
+  </table></div>
+  <h3>Ancien Régime</h3>
+  <div class="table-scroll"><table>
+    <thead><tr><th>Repère</th><th>Chiffre</th><th>Ce que ça renforce</th></tr></thead>
+    <tbody>
+      <tr><td>Feux</td><td>× environ 4</td><td>Une maison qui fume n’est pas un habitant. Multiplier par environ 4 donne une fourchette, pas un recensement.</td></tr>
+      <tr><td>Royaume</td><td>15-18, 16-20, 21, puis 22 millions</td><td>De 1500 à 1740, la hausse refuse la stagnation. En copie, on écrit environ 22 millions. L’INED dit 24,6 sur le territoire actuel : on le cite, on ne le substitue pas.</td></tr>
+      <tr><td>Crise courte</td><td>2 à 3 millions en 3 ou 4 ans</td><td>La courbe longue est cassée en quelques années. Prévoir les effectifs de l’année suivante est presque un anachronisme.</td></tr>
+      <tr><td>Ruraux</td><td>80 %, 50 % d’urbains vers 1938</td><td>Quatre habitants sur cinq vivent à la campagne. La France n’atteint 50 % d’urbains que vers 1938, environ un siècle et demi après l’Angleterre.</td></tr>
+      <tr><td>Villes</td><td>Paris 530 000, Nantes 80 000, Rennes 40 000</td><td>Même les grandes villes restent rares : vingt seulement dépassent 30 000 habitants. « Urbain » ne veut pas dire Paris.</td></tr>
+      <tr><td>Ménage et célibat</td><td>4,5 personnes ; 10 % en 1789 ; 35 % à Rouen</td><td>Le ménage est complexe, pas nombreux, et tout le monde ne se marie pas. Les 35 % de Rouen sont une ville, pas la moyenne du royaume.</td></tr>
+      <tr><td>Âges, 1740</td><td>40 % / 50 % / 9 %</td><td>40 % ont moins de 20 ans et 9 % ont 60 ans ou plus. C’est une population jeune. L’INED trouve 41 / 50 / 9, tout près du cours.</td></tr>
+      <tr><td>Naissances</td><td>511 garçons pour 500 filles</td><td>Il naît un peu plus de garçons. La mort de 0 à 1 an, plus forte chez eux, rééquilibre les deux sexes jusque vers 50 ans.</td></tr>
+      <tr><td>Paroisse et lundi</td><td>68 % ; 65 % le lundi</td><td>Entre 1740 et 1789, 68 % épousent quelqu’un de la même paroisse. Au XVIIe siècle, 65 % des noces tombent le lundi. Le conjoint et le jour sont surveillés.</td></tr>
+      <tr><td>Mortalité</td><td>30 pour 1 000 ; 280 pour 1 000</td><td>30 décès pour 1 000 en année courante, 280 nouveau-nés sur 1 000 avant un an. Goubert : deux enfants pour faire un adulte.</td></tr>
+      <tr><td>Chartres, Thymerais</td><td>72 contre 49 ; 597 contre 515</td><td>Les chanoines, nourris et chauffés, vivent 23 ans de plus que les salariés. Chez les enfants, le laboureur enterre moins que le journalier. La misère change la mort.</td></tr>
+      <tr><td>Sorcellerie</td><td>environ 85 % de femmes</td><td>Au XVIe siècle, les femmes de plus de 50 ans deviennent plus nombreuses. Les procès visent surtout des veuves âgées, détentrices d’un savoir.</td></tr>
+      <tr><td>Médecins</td><td>environ 2 000 en 1786</td><td>Trop peu, et sans vraie expérimentation, pour renverser 280 pour 1 000. La fistule de Louis XIV, en 1686, s’opère sans anesthésie.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="auteurs">
+  <h2>Auteurs, par thème</h2>
+  <p class="lead">Un nom sert une idée. On ne le cite pas pour faire une liste.</p>
+  <h3>Néolithique</h3>
+  <div class="table-scroll"><table>
+    <thead><tr><th>Nom</th><th>Ce qu’il dit</th><th>Ce que ça renforce</th></tr></thead>
+    <tbody>
+      <tr><td>Brasseul</td><td>Vers −12 000, au Kurdistan et en Irak, l’assèchement fait manquer le gibier. Les femmes passent du blé sauvage à la culture : c’est l’hypothèse du cours.</td><td>La cause est climatique, datée et située. La céréale vient ensuite, parce que la chasse ne nourrit plus les enfants.</td></tr>
+      <tr><td>Childe, d’après Pumpelly</td><td>Entre −9000 et −8000, l’aridité rassemble hommes, bêtes et plantes près de l’eau.</td><td>La domestication suit cette promiscuité. On n’invente pas l’agriculture dans le vide : on garde ce qu’on a sous les yeux.</td></tr>
+      <tr><td>Sahlins</td><td>Le paysan travaille plus que le chasseur.</td><td>L’agriculture n’est pas un confort. Si elle coûte plus de travail, le passage reste à expliquer : contrainte, puis choix.</td></tr>
+      <tr><td>Braidwood</td><td>On sélectionne. Le cochon vient du sanglier, dans un espace que l’homme aménage.</td><td>La thèse culturelle : l’homme devient acteur. Ce n’est plus seulement le climat qui décide.</td></tr>
+      <tr><td>North, 1981</td><td>Première révolution économique : agriculture et propriété privée, bien avant l’industrie.</td><td>Le stock oblige à rester sur la terre. Pour la première fois, ce qui est produit peut s’hériter et se défendre.</td></tr>
+    </tbody>
+  </table></div>
+  <h3>Peste</h3>
+  <div class="table-scroll"><table>
+    <thead><tr><th>Nom</th><th>Ce qu’il dit</th><th>Ce que ça renforce</th></tr></thead>
+    <tbody>
+      <tr><td>Gilles Le Muisit</td><td>À Tournai, il décrit les pluies et la faim de 1315-1317. Le Sud n’est pas touché de la même façon. À Ypres, en 1316, environ un dixième meurt.</td><td>La première pointe est une famine du Nord, trente ans avant la peste. On ne la fond pas avec 1347.</td></tr>
+      <tr><td>Boccace</td><td>Il décrit les bubons et une mort en trois jours. Une fois le mal déclaré, moins de 0,5 % survivent.</td><td>La peste noire est foudroyante. Ce n’est pas une mauvaise grippe dont on se remet.</td></tr>
+      <tr><td>Froissart</td><td>Il parle d’un tiers du monde, c’est-à-dire de l’Europe.</td><td>C’est l’ordre de grandeur du désastre, pas un pourcentage à recopier pour chaque ville. Paris tourne autour de 50 %, Hambourg autour de 80 %.</td></tr>
+      <tr><td>Gabriele de’ Mussi</td><td>Notaire italien, source unique et tardive : à Caffa, en 1346, les Mongols de Djanibeg auraient catapulté des cadavres.</td><td>Les puces quittent le corps dès la mort, donc ces cadavres ne portent plus le mal. Tana, dès 1345, fait entrer la peste par le commerce.</td></tr>
+      <tr><td>Knighton de Leicester</td><td>Chanoine augustinien : le salaire des moissonneurs double ou triple, payé en argent ou en nature.</td><td>Ceux qui restent sont rares, donc ils dictent le prix du travail. Deux fois plus pour travailler trois fois moins.</td></tr>
+      <tr><td>Langland</td><td><em>Pierre le laboureur</em> (1332-1386), pas « Peine » : on lâche le lard pour la viande fraîche, table des bourgeois et des nobles.</td><td>Le salaire a monté assez pour changer l’assiette. Le pain cher n’appauvrit pas forcément l’ouvrier.</td></tr>
+      <tr><td>Gower</td><td>1330-1402, pas « Gowen » : les classes laborieuses exigent pour leur ventre ce qu’exige un seigneur. « Ces bons vieux temps sont anéantis. »</td><td>Les élites y voient un monde renversé, pas une loi du marché. S’ils n’obtiennent pas leurs conditions, ils partent.</td></tr>
+      <tr><td>Scheidel et Alfani</td><td>En Italie, les 10 % les plus riches passent d’environ 65 % à 50 % de la richesse vers 1350, pour environ deux siècles.</td><td>C’est un resserrement, pas l’égalité. Florence, le 9 octobre 1348, constate que certains pauvres sont devenus riches. La concentration remonte ensuite.</td></tr>
+    </tbody>
+  </table></div>
+  <h3>Ancien Régime</h3>
+  <div class="table-scroll"><table>
+    <thead><tr><th>Nom</th><th>Ce qu’il dit</th><th>Ce que ça renforce</th></tr></thead>
+    <tbody>
+      <tr><td>Malthus</td><td>On ne met pas au monde des enfants que l’on ne peut pas nourrir. Pas « Mastus ».</td><td>Reculer le mariage, vers 27-28 ans pour les hommes, raccourcit les années fertiles. La ménopause arrive vers 40 ans.</td></tr>
+      <tr><td>Bideau</td><td>On se marie quand on peut s’installer, le plus souvent à la mort du père.</td><td>La terre commande les noces. Le cadet reste célibataire, entre dans les ordres, ou entre dans l’armée.</td></tr>
+      <tr><td>Ariès</td><td>Pas d’« enfant roi » : on n’est sorti d’affaire que vers 15 ans.</td><td>On baptise le jour même, parce que la mort des enfants est trop présente pour qu’on s’attache comme aujourd’hui.</td></tr>
+      <tr><td>Goubert et Meuvret</td><td>« Il fallait deux enfants pour faire un adulte. » Été pourri, pain des deux tiers, emprunt la première année, refus la seconde.</td><td>280 pour 1 000 avant un an, puis la disette qui devient famine. Ils font mourir de faim. On ne dit pas qu’ils ont menti.</td></tr>
+      <tr><td>Chaunu et Baehrel, 1962</td><td>Pas « Bacherel ». La côte, le bocage et la forêt empêchent de mourir le ventre vide. L’épidémie tue les corps faibles.</td><td>L’autre chaîne, à lire à côté de Goubert. Un auteur a une orientation. Un seul livre ne suffit pas.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+</div>
+</main>
+<script>
+function setMode(mode) {
+  if (mode !== 'express' && mode !== 'sujets') mode = 'complet';
+  document.getElementById('express').hidden = mode !== 'express';
+  document.getElementById('sujets').hidden = mode !== 'sujets';
+  document.getElementById('complet').hidden = mode !== 'complet';
+  document.getElementById('nav-express').hidden = mode !== 'express';
+  document.getElementById('nav-sujets').hidden = mode !== 'sujets';
+  document.getElementById('nav-complet').hidden = mode !== 'complet';
+  document.querySelectorAll('[data-mode]').forEach(function (b) {
+    b.setAttribute('aria-pressed', b.getAttribute('data-mode') === mode ? 'true' : 'false');
+  });
+  try { localStorage.setItem('recap-mode', mode); } catch (e) {}
+}
+document.getElementById('theme').addEventListener('click', function () {
+  var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  try { localStorage.setItem('hfe-theme', next); } catch (e) {}
+});
+document.querySelector('.sticky-nav').addEventListener('click', function (e) {
+  var b = e.target.closest('[data-mode]');
+  if (!b) return;
+  setMode(b.getAttribute('data-mode'));
+});
+try {
+  var saved = localStorage.getItem('recap-mode');
+  if (saved === 'express' || saved === 'sujets') setMode(saved);
+} catch (e) {}
+</script>
+</body>
+</html>
