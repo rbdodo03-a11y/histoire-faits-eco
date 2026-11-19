@@ -34,7 +34,16 @@ svg { max-width: 100%; height: auto; overflow: hidden; }
 h1, h2, h3 { font-family: var(--serif); font-weight: 600; line-height: 1.2; }
 h1 { margin: 0; font-size: 28px; }
 h2 { font-size: 28px; margin: 28px 0 10px; scroll-margin-top: calc(118px + env(safe-area-inset-top)); }
-h3 { font-size: 20px; margin: 18px 0 8px; }
+main > section { margin: 40px 0; padding-top: 8px; border-top: 4px solid var(--accent); }
+.point {
+  background: var(--paper); border: 1px solid var(--line); border-radius: 16px;
+  padding: 0 16px 16px; margin: 18px 0;
+}
+.point > h3 {
+  margin: 0 -16px 12px; padding: 14px 16px; background: var(--bg);
+  border-bottom: 1px solid var(--line); border-radius: 16px 16px 0 0;
+}
+.point h4 { margin: 14px 0 6px; font-size: 17px; }
 a { color: var(--accent); }
 .back, .modes button, .jump a, button.ctrl {
   font: inherit; font-size: 16px; text-decoration: none; border: 1px solid var(--line); background: var(--bg);
