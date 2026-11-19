@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fils rouges — Histoire de la pensée économique</title>
+<link rel="stylesheet" href="hpe.css">
+<script>
+try {
+  var th = localStorage.getItem('hfe-theme');
+  if (th) document.documentElement.setAttribute('data-theme', th);
+  else if (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches) document.documentElement.setAttribute('data-theme', 'dark');
+} catch (e) {}
+</script>
+</head>
+<body>
+<header>
+  <div>
+    <p class="kicker">Six évolutions à réciter</p>
+    <h1>Fils rouges du contrôle</h1>
+  </div>
+  <div class="head-actions">
+    <button type="button" class="back" id="theme">Thème</button>
+    <a class="back" href="pensee.html">Cours</a>
+    <a class="back" href="pensee-train.html">Entraînement</a>
+  </div>
+</header>
+<main>
+<section>
+  <h2>Le taux d’intérêt et l’usure</h2>
+  <p>Aristote condamne l’usure : la monnaie ne doit pas être la fin. Thomas d’Aquin la condamne autrement : la monnaie se consomme en servant, comme un jus de fruit, donc l’intérêt ferait payer deux fois, contre la justice commutative. La maison, elle, se loue. À Salamanque, le prêt n’est plus interdit. Seul le taux excessif reste l’usure, et le législateur l’encadre. Navarro veut un profit modeste et condamne les changeurs. Les mercantilistes ne condamnent plus l’intérêt : la monnaie enrichit la nation. Smith ne le laisse pas libre pour autant. Il plafonne le crédit à 5 ou 6 %, pour que les banques ne préfèrent pas les projectors aux hommes prudents. Schumpeter renverse le rôle : sans le crédit du banquier, l’éphore, il n’y a pas d’innovation.</p>
+</section>
+<section>
+  <h2>La théorie de la valeur</h2>
+  <p>Thomas cherche un juste prix, commutative et distributive. Smith, en état primitif, retient le travail incorporé. En état avancé, le prix commande du travail : salaire, profit et rente. Les 50 chaises passent de 10 journées incorporées à 15 journées commandées. Ricardo, pour les biens reproductibles, garde le travail incorporé. L’exemple des bas de coton additionne tous les travaux jusqu’au marché. Say refuse de s’arrêter au coût du travail : utilité et services. Les marginalistes mesurent l’utilité marginale, décroissante, première loi de Gossen. Les huit verres de Menger vont jusqu’à la satiété, puis à la désutilité. Marx reprend une valeur-travail, mais le travail privé ne suffit pas. Les trois fabricants de chaises montrent qu’il faut le travail abstrait, socialement nécessaire.</p>
+</section>
+<section>
+  <h2>La monnaie et la dichotomie</h2>
+  <p>Chez Thomas, la monnaie est stérile au sens où l’on ne peut pas vendre son usage à part. Chez les mercantilistes, elle est la richesse, et trop d’or fait l’inflation. Les classiques et les marginalistes posent une dichotomie : le réel commande, la monnaie est un voile. Marx la rompt. Dans A − M − A', la monnaie est le point de départ et le but, augmenté de la plus-value. Schumpeter la rompt aussi : la banque crée la monnaie qui finance l’innovation. Sans elle, pas de développement.</p>
+</section>
+<section>
+  <h2>Le rôle de l’État</h2>
+  <p>Colbert protège : manufactures d’État, Compagnie des Indes, douanes, corporations, refus des importations anglaises et espagnoles. Quesnay libère le grain entre 1764 et 1771 et fait de l’agriculture la seule source nette. Smith défend la main invisible, la division du travail et le libre-échange, avec deux entorses : le plafond du crédit et l’éducation publique du livre V. Say réduit l’État au gendarme, sous la Restauration, contre le retour des corporations et des privilèges royaux.</p>
+</section>
+<section>
+  <h2>L’état stationnaire et les crises</h2>
+  <p>Ricardo : la population et le blé, bien-salaire, mettent en culture des terres moins fertiles. Les salaires montent, les profits baissent, pour des raisons naturelles. On retarde par les machines et le libre-échange. On ne supprime pas. Say : toute offre crée sa demande, en 1803. Pas de crise durable, pas de chômage structurel. Marx : le taux Pv/(c+v) baisse parce que c/v monte. Les capitalistes en sont la cause. Contre-tendances temporaires, puis paupérisation, armée de réserve, crises plus graves. Le XXe siècle et l’État-providence limitent cette prévision. Schumpeter : sans innovation, routine et état stationnaire. L’innovation majeure sort de l’équilibre. La croissance est cyclique, pas un retour tranquille au prix naturel.</p>
+</section>
+<section>
+  <h2>L’entrepreneur</h2>
+  <p>Chez Smith, le projector cherche un profit énorme et risque de ruiner le crédit. L’homme prudent, frugal, investit dans un projet modéré. Say fait de l’entrepreneur celui qui combine travail et capital. Il insiste sur l’intelligence, et il combat les manufactures privilégiées. Schumpeter le veut innovateur : nouvelles combinaisons, vision, intuition, profit secondaire, motifs matériels et immatériels. Ce n’est pas un Homo oeconomicus. Il dépend du banquier qui sélectionne.</p>
+</section>
+<section>
+  <h2>Comparer deux ou trois auteurs</h2>
+  <div class="widget">
+    <div class="row" id="picks"></div>
+    <div id="compare"></div>
+  </div>
+</section>
+</main>
+<script>
+document.getElementById('theme').addEventListener('click', function () {
+  var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  try { localStorage.setItem('hfe-theme', next); } catch (e) {}
+});
+var authors = [
+  { id: 'smith', nom: 'Smith', dates: '1723-1790', oeuvre: 'Sentiments moraux 1759, Richesse des nations 1776', valeur: 'Incorporé en état primitif, commandé en état avancé', monnaie: 'Dichotomie, le réel prime', etat: 'Main invisible, sauf crédit 5-6 % et école', crises: 'Gravitation vers le prix naturel' },
+  { id: 'ricardo', nom: 'Ricardo', dates: '1772-1823', oeuvre: 'Principes 1817', valeur: 'Travail incorporé, biens reproductibles', monnaie: 'Dichotomie classique', etat: 'Libre-échange pour retarder l’état stationnaire', crises: 'Limites naturelles, blé et rente' },
+  { id: 'say', nom: 'Say', dates: '1767-1832', oeuvre: 'Traité 1803', valeur: 'Utilité et services, contre la seule valeur-travail', monnaie: 'Dichotomie, loi des débouchés', etat: 'État-gendarme', crises: 'Pas de crise durable' },
+  { id: 'marx', nom: 'Marx', dates: '1818-1883', oeuvre: 'Le Capital 1867', valeur: 'Travail abstrait, socialement nécessaire', monnaie: 'Rupture, A − M − A\'', etat: 'Critique du capitalisme', crises: 'Baisse de Pv/(c+v), armée de réserve' },
+  { id: 'sch', nom: 'Schumpeter', dates: '1883-1950', oeuvre: 'Évolution économique 1911, Capitalisme socialisme et démocratie 1942', valeur: 'Nouvelles combinaisons', monnaie: 'Rupture, crédit bancaire', etat: 'Le banquier éphore sélectionne', crises: 'Cycle de destruction créatrice' },
+  { id: 'menger', nom: 'Menger', dates: '1840-1921', oeuvre: 'Utilité marginale, verres d’eau', valeur: 'Subjective, marginale, lois de Gossen', monnaie: 'Dichotomie marginaliste', etat: 'Libéral, équilibre général', crises: 'Pas d’état stationnaire au programme' }
+];
+var on = {};
+var picks = document.getElementById('picks');
+authors.forEach(function (a) {
+  var b = document.createElement('button');
+  b.type = 'button';
+  b.className = 'ctrl';
+  b.textContent = a.nom;
+  b.addEventListener('click', function () {
+    on[a.id] = !on[a.id];
+    var n = Object.keys(on).filter(function (k) { return on[k]; }).length;
+    if (n > 3) on[a.id] = false;
+    b.setAttribute('aria-pressed', on[a.id] ? 'true' : 'false');
+    draw();
+  });
+  picks.appendChild(b);
+});
+function draw() {
+  var chosen = authors.filter(function (a) { return on[a.id]; });
+  var box = document.getElementById('compare');
+  if (!chosen.length) { box.innerHTML = '<p>Choisis deux ou trois noms.</p>'; return; }
+  var rows = ['dates', 'oeuvre', 'valeur', 'monnaie', 'etat', 'crises'];
+  var labels = { dates: 'Dates', oeuvre: 'Œuvre', valeur: 'Valeur', monnaie: 'Monnaie', etat: 'État', crises: 'Crises' };
+  box.innerHTML = '<div class="table-scroll"><table><thead><tr><th></th>' + chosen.map(function (a) { return '<th>' + a.nom + '</th>'; }).join('') + '</tr></thead><tbody>' +
+    rows.map(function (r) {
+      return '<tr><td>' + labels[r] + '</td>' + chosen.map(function (a) { return '<td>' + a[r] + '</td>'; }).join('') + '</tr>';
+    }).join('') + '</tbody></table></div>';
+}
+draw();
+</script>
+</body>
+</html>

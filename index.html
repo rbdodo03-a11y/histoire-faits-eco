@@ -3,12 +3,87 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Récap — Histoire des faits économiques</title>
-<link rel="canonical" href="recap.html">
-<script>location.replace("recap.html");</script>
-<meta http-equiv="refresh" content="0; url=recap.html">
+<title>Deux matières</title>
+<script>
+try {
+  var th = localStorage.getItem('hfe-theme');
+  if (th) document.documentElement.setAttribute('data-theme', th);
+  else if (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches) document.documentElement.setAttribute('data-theme', 'dark');
+} catch (e) {}
+</script>
+<style>
+:root {
+  --bg: #f3ecdf; --paper: #fffaf3; --ink: #1e1a16; --muted: #5c5348;
+  --line: #e3d5c3; --accent: #8d3b2f; --accent-ink: #fffaf3;
+  --sans: "Segoe UI", system-ui, sans-serif;
+  --serif: Palatino, "Palatino Linotype", Georgia, serif;
+}
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #141210; --paper: #211c17; --ink: #f4ecdf; --muted: #cbbba6;
+  --line: #3c342c; --accent: #e39a86; --accent-ink: #211410;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 16px;
+  line-height: 1.55; overflow-wrap: break-word;
+  padding: calc(28px + env(safe-area-inset-top)) 18px calc(40px + env(safe-area-inset-bottom));
+  padding-left: max(18px, env(safe-area-inset-left));
+  padding-right: max(18px, env(safe-area-inset-right));
+}
+h1, h2 { font-family: var(--serif); font-weight: 600; line-height: 1.2; }
+h1 { margin: 0 0 8px; font-size: 32px; }
+.kicker { margin: 0 0 8px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); font-size: 12px; }
+.lead { color: var(--muted); max-width: 36rem; }
+main { max-width: 720px; margin: 0 auto; }
+.choices { display: grid; gap: 14px; margin-top: 28px; }
+.choice {
+  display: block; text-decoration: none; color: inherit; background: var(--paper);
+  border: 1px solid var(--line); border-radius: 16px; padding: 18px 18px 16px; min-height: 44px;
+}
+.choice:hover, .choice:focus-visible { border-color: var(--accent); }
+.choice h2 { margin: 0 0 6px; font-size: 24px; }
+.choice p { margin: 0; color: var(--muted); }
+.choice .go { display: inline-block; margin-top: 12px; color: var(--accent); font-weight: 650; }
+.side { margin: 10px 0 0; font-size: 15px; }
+.side a { color: var(--accent); }
+.theme {
+  font: inherit; font-size: 16px; border: 1px solid var(--line); background: var(--paper); color: var(--ink);
+  border-radius: 999px; padding: 8px 14px; min-height: 44px; cursor: pointer;
+}
+@media (max-width: 700px) {
+  h1 { font-size: 26px; }
+  .choice h2 { font-size: 22px; }
+}
+</style>
 </head>
 <body>
-<p><a href="recap.html">Ouvrir le récap</a></p>
+<main>
+  <p class="kicker">L1</p>
+  <h1>Deux matières</h1>
+  <p class="lead">Chaque cours a sa page. Rien ne se mélange.</p>
+  <div class="choices">
+    <a class="choice" href="recap.html">
+      <h2>Histoire des faits économiques</h2>
+      <p>Néolithique, peste du XIVe siècle, population sous l’Ancien Régime.</p>
+      <span class="go">Ouvrir le récap</span>
+    </a>
+    <p class="side">Le quiz et les cartes de cette matière : <a href="revision.html">site de révision</a>.</p>
+    <a class="choice" href="pensee.html">
+      <h2>Histoire de la pensée économique</h2>
+      <p>Le cours sera ajouté dès qu’il est collé ici.</p>
+      <span class="go">Ouvrir la page</span>
+    </a>
+  </div>
+  <p class="side"><button type="button" class="theme" id="theme">Thème</button></p>
+</main>
+<script>
+document.getElementById('theme').addEventListener('click', function () {
+  var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  try { localStorage.setItem('hfe-theme', next); } catch (e) {}
+});
+</script>
 </body>
 </html>

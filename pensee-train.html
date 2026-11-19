@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Entraînement — Histoire de la pensée économique</title>
+<link rel="stylesheet" href="hpe.css">
+<script>
+try {
+  var th = localStorage.getItem('hfe-theme');
+  if (th) document.documentElement.setAttribute('data-theme', th);
+  else if (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches) document.documentElement.setAttribute('data-theme', 'dark');
+} catch (e) {}
+</script>
+<style>
+.q button, .tabs button { font: inherit; font-size: 16px; min-height: 44px; margin: 4px 4px 0 0; border-radius: 12px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); cursor: pointer; padding: 8px 12px; }
+.q button.good { background: var(--ok-bg); }
+.q button.bad { background: var(--warn-bg); }
+input[type="search"], select { font: inherit; font-size: 16px; min-height: 44px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); border-radius: 12px; padding: 8px 12px; }
+.score { font-weight: 700; }
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <p class="kicker">Précision</p>
+    <h1>Entraînement</h1>
+  </div>
+  <div class="head-actions">
+    <button type="button" class="back" id="theme">Thème</button>
+    <a class="back" href="pensee.html">Cours</a>
+    <a class="back" href="pensee-fils.html">Fils rouges</a>
+  </div>
+</header>
+<main>
+<p class="score" id="score">Score : 0 / 0</p>
+<div class="tabs" id="tabs">
+  <button type="button" data-tab="dates" aria-pressed="true">Dates</button>
+  <button type="button" data-tab="qui">Qui pense quoi</button>
+  <button type="button" data-tab="pieges">Pièges</button>
+  <button type="button" data-tab="calc">Calculs</button>
+  <button type="button" data-tab="cartes">Cartes</button>
+  <button type="button" data-tab="index">Annuaire</button>
+</div>
+<div id="panel"></div>
+</main>
+<script>
+document.getElementById('theme').addEventListener('click', function () {
+  var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  try { localStorage.setItem('hfe-theme', next); } catch (e) {}
+});
+var KEY = 'hpe-train-v1';
+var state = { ok: 0, n: 0, wrong: [] };
+try { state = JSON.parse(localStorage.getItem(KEY)) || state; } catch (e) {}
+function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
+function showScore() {
+  document.getElementById('score').textContent = 'Score : ' + state.ok + ' / ' + state.n + (state.wrong.length ? ' · à revoir : ' + state.wrong.slice(-3).join(', ') : '');
+}
+var dates = [
+  ['Date de la Somme théologique ?', '1266-1273', ['1759', '1776', '1803']],
+  ['Libéralisation du grain ?', '1764-1771', ['1619-1683', '1814-1830', '1758']],
+  ['Loi des débouchés ?', '1803', ['1776', '1817', '1867']],
+  ['Restauration ?', '1814-1830', ['1764-1771', '1848-1851', '1914-1918']],
+  ['Richesse des nations ?', '1776', ['1759', '1817', '1803']],
+  ['Principes de Ricardo ?', '1817', ['1776', '1803', '1867']],
+  ['Le Capital ?', '1867', ['1848', '1817', '1911']],
+  ['Théorie de l’évolution économique ?', '1911', ['1942', '1867', '1758']]
+];
+var qui = [
+  ['Bonne et mauvaise chrématistique', 'Aristote', ['Platon', 'Quesnay', 'Say']],
+  ['Projectors et plafond de 5 à 6 %', 'Smith', ['Ricardo', 'Marx', 'Colbert']],
+  ['État-gendarme', 'Say', ['Colbert', 'Quesnay', 'Marx']],
+  ['Le banquier éphore', 'Schumpeter', ['Smith', 'Say', 'Ricardo']],
+  ['Travail abstrait', 'Marx', ['Smith', 'Menger', 'Say']],
+  ['Première loi de Gossen', 'Gossen, chez les marginalistes', ['Ricardo', 'Quesnay', 'Colbert']],
+  ['Jeu à somme nulle', 'Mercantilistes', ['Physiocrates', 'Smith', 'Say']],
+  ['Justice commutative', 'Thomas d’Aquin', ['Aristote', 'Navarro', 'Menger']]
+];
+var pieges = [
+  ['Smith est-il contre toute intervention ?', 'Non. Plafond du crédit à 5-6 % et éducation publique dans le livre V.', ['Oui, la main invisible n’a pas d’exception', 'Oui, il refuse l’école', 'Non, il veut des corporations']],
+  ['Pourquoi Thomas interdit-il l’intérêt ?', 'La monnaie se consomme en servant. Payer l’usage en plus, c’est payer deux fois.', ['Parce que la maison ne se loue pas', 'Parce que le profit agricole est stérile', 'Parce que le commerce est un jeu à somme nulle']],
+  ['Pourquoi le profit baisse-t-il chez Marx, pas comme chez Ricardo ?', 'Marx : comportement des capitalistes, c/v monte. Ricardo : limites naturelles, le blé et les terres.', ['Marx : la nature. Ricardo : les capitalistes.', 'Les deux : la monnaie trop abondante.', 'Les deux : la loi des débouchés.']],
+  ['Say a-t-il déjà l’utilité marginale ?', 'Non. Il introduit utilité et services. La marge est Menger, Jevons, Gossen.', ['Oui, les huit verres sont de Say', 'Oui, c’est la loi des débouchés', 'Non, il reste mercantiliste']]
+];
+var calcs = [
+  ['Travail incorporé et commandé des chaises', '10 jours à 10 font 100 de salaires. Profit 25, rente 25, prix 150. Incorporé : 10 journées. Commandé : 15 journées.'],
+  ['Huitième verre de Menger', 'Satisfaction 98, utilité marginale −7. Au septième verre, satisfaction 105 et marge 0 : satiété.'],
+  ['c/v et le taux de profit', 'x = c/v, pas c/d. c constant, v variable. Taux de profit = Pv/(c+v). S’il monte en capital constant, le taux tend à baisser.'],
+  ['M − A − M\' et A − M − A\'', 'La première échange une marchandise contre une autre, sans profit. La seconde avance de l’argent et le récupère augmenté. Pv = A\' − A.']
+];
+var cards = [
+  ['Azpilcueta', '1492-1586, dit Navarro. Profit modeste. Changeurs condamnés. Les notes disaient 1596.'],
+  ['Soto', '1494-1560, École de Salamanque.'],
+  ['Colbert', '1619-1683. Manufactures, Compagnie des Indes, protectionnisme.'],
+  ['Quesnay', '1694-1774. Tableau 1758. Trois classes. Grain 1764-1771.'],
+  ['Smith', '1723-1790. 1759 et 1776. Gravitation. Projectors. Livre V.'],
+  ['Ricardo', '1772-1823. Principes 1817. Rente, blé, état stationnaire naturel.'],
+  ['Say', '1767-1832. Traité 1803. État-gendarme. Loi des débouchés.'],
+  ['Menger', '1840-1921. Verres d’eau. Utilité marginale.'],
+  ['Marx', '1818-1883. Capital 1867. Travail abstrait. c/v. Pv/(c+v).'],
+  ['Schumpeter', '1883-1950. 1911 et 1942. Innovation. Éphore.']
+];
+var index = [
+  ['Azpilcueta', '1492-1586, dit Navarro. Profit modeste. Changeurs condamnés. Les notes disaient 1596.', 'morale'],
+  ['Soto', '1494-1560, École de Salamanque.', 'morale'],
+  ['Platon', 'Condamne la propriété privée. Vision holiste.', 'morale'],
+  ['Aristote', 'Propriété privée. Bonne et mauvaise chrématistique. Usure.', 'morale'],
+  ['Thomas d’Aquin', 'Somme 1266-1273. Juste prix. Maison contre jus de fruit.', 'morale'],
+  ['Bodin', 'Vers 1530-1596. Mercantilisme. Inflation par l’or.', 'morale'],
+  ['Colbert', '1619-1683. Manufactures, Compagnie des Indes, protectionnisme.', 'morale'],
+  ['Montchrestien', 'Vers 1575-1621.', 'morale'],
+  ['Petty', '1623-1687.', 'morale'],
+  ['Child', 'Josiah Child, 1630-1699.', 'morale'],
+  ['Quesnay', '1694-1774. Tableau 1758. Trois classes. Grain 1764-1771.', 'classique'],
+  ['Smith', '1723-1790. 1759 et 1776. Gravitation. Projectors. Livre V.', 'classique'],
+  ['Ricardo', '1772-1823. Principes 1817. Rente, blé, état stationnaire naturel.', 'classique'],
+  ['Say', '1767-1832. Traité 1803. État-gendarme. Loi des débouchés.', 'classique'],
+  ['Bentham', '1748-1832. Utilitarisme. Intensité, durée, probabilité, proximité.', 'marginaliste'],
+  ['Jevons', '1835-1882. Calcul des plaisirs et des peines.', 'marginaliste'],
+  ['Menger', '1840-1921. Verres d’eau. Utilité marginale.', 'marginaliste'],
+  ['Gossen', '1810-1858. Deux lois.', 'marginaliste'],
+  ['Walras', '1834-1910. Équilibre général marginaliste.', 'marginaliste'],
+  ['Marx', '1818-1883. Capital 1867. Travail abstrait. c/v. Pv/(c+v).', 'hétérodoxe'],
+  ['Schumpeter', '1883-1950. 1911 et 1942. Innovation. Éphore.', 'hétérodoxe'],
+  ['Nobel 2019', 'Duflo, Banerjee, Kremer. Pauvreté.', '']
+];
+function ask(item, kind) {
+  var good = item[1];
+  var opts = item[2].concat([good]).sort(function () { return Math.random() - 0.5; });
+  var html = '<article class="q card"><p>' + item[0] + '</p>' + opts.map(function (o) {
+    return '<button type="button" data-ok="' + (o === good ? '1' : '0') + '">' + o + '</button>';
+  }).join('') + '<p class="why" hidden></p></article>';
+  var wrap = document.createElement('div');
+  wrap.innerHTML = html;
+  var art = wrap.firstChild;
+  art.addEventListener('click', function (e) {
+    var b = e.target.closest('button');
+    if (!b || art.dataset.done) return;
+    art.dataset.done = '1';
+    state.n += 1;
+    var yes = b.getAttribute('data-ok') === '1';
+    b.classList.add(yes ? 'good' : 'bad');
+    if (!yes) state.wrong.push(item[0]);
+    else state.ok += 1;
+    art.querySelector('.why').hidden = false;
+    art.querySelector('.why').textContent = yes ? 'Juste. ' + good : 'Non. La réponse du cours : ' + good;
+    save();
+    showScore();
+  });
+  return art;
+}
+function render(tab) {
+  var panel = document.getElementById('panel');
+  panel.innerHTML = '';
+  if (tab === 'dates') dates.forEach(function (q) { panel.appendChild(ask(q)); });
+  if (tab === 'qui') qui.forEach(function (q) { panel.appendChild(ask(q)); });
+  if (tab === 'pieges') pieges.forEach(function (q) { panel.appendChild(ask(q)); });
+  if (tab === 'calc') {
+    calcs.forEach(function (c) {
+      var d = document.createElement('details');
+      d.className = 'card';
+      d.innerHTML = '<summary>' + c[0] + '</summary><p>' + c[1] + '</p>';
+      panel.appendChild(d);
+    });
+  }
+  if (tab === 'cartes') {
+    cards.forEach(function (c) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = c[0];
+      b.addEventListener('click', function () {
+        b.textContent = b.textContent === c[0] ? c[1] : c[0];
+      });
+      panel.appendChild(b);
+    });
+  }
+  if (tab === 'index') {
+    var tools = document.createElement('div');
+    tools.className = 'row';
+    tools.innerHTML = '<input type="search" id="q" placeholder="Nom, date ou concept"><select id="courant"><option value="">Tous</option><option>morale</option><option>classique</option><option>marginaliste</option><option>hétérodoxe</option></select>';
+    panel.appendChild(tools);
+    var list = document.createElement('div');
+    panel.appendChild(list);
+    function paint() {
+      var s = document.getElementById('q').value.toLowerCase();
+      var courant = document.getElementById('courant').value;
+      list.innerHTML = index.filter(function (a) {
+        var blob = (a[0] + ' ' + a[1] + ' ' + a[2]).toLowerCase();
+        return blob.indexOf(s) >= 0 && (!courant || a[2] === courant);
+      }).map(function (a) {
+        return '<article class="fiche"><strong>' + a[0] + '</strong><p>' + a[1] + '</p></article>';
+      }).join('');
+    }
+    tools.addEventListener('input', paint);
+    tools.addEventListener('change', paint);
+    paint();
+  }
+}
+document.getElementById('tabs').addEventListener('click', function (e) {
+  var b = e.target.closest('[data-tab]');
+  if (!b) return;
+  this.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+  b.setAttribute('aria-pressed', 'true');
+  render(b.getAttribute('data-tab'));
+});
+showScore();
+render('dates');
+</script>
+</body>
+</html>
