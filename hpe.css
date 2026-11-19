@@ -34,7 +34,9 @@ svg { max-width: 100%; height: auto; overflow: hidden; }
 h1, h2, h3 { font-family: var(--serif); font-weight: 600; line-height: 1.2; }
 h1 { margin: 0; font-size: 28px; }
 h2 { font-size: 28px; margin: 28px 0 10px; scroll-margin-top: calc(118px + env(safe-area-inset-top)); }
-main > section { margin: 40px 0; padding-top: 8px; border-top: 4px solid var(--accent); }
+.chap-switch, .volets { display: flex; gap: 8px; overflow-x: auto; -webkit-overflow-scrolling: touch; flex-wrap: nowrap; margin: 8px 0 16px; }
+section.chapitre[hidden] { display: none; }
+.volet[hidden] { display: none; }
 .point {
   background: var(--paper); border: 1px solid var(--line); border-radius: 16px;
   padding: 0 16px 16px; margin: 18px 0;

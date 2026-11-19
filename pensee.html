@@ -64,9 +64,22 @@ try {
     <div id="frise-liste"></div>
   </div>
 </section>
+<div class="chap-switch" id="chap-switch">
+  <button type="button" class="ctrl" data-chap="c1" aria-pressed="true">Chapitre 1</button>
+  <button type="button" class="ctrl" data-chap="c2" aria-pressed="false">Chapitre 2</button>
+  <button type="button" class="ctrl" data-chap="c3" aria-pressed="false">Chapitre 3</button>
+  <button type="button" class="ctrl" data-chap="c4" aria-pressed="false">Chapitre 4</button>
+  <button type="button" class="ctrl" data-chap="c5" aria-pressed="false">Chapitre 5</button>
+</div>
 
-<section id="c1">
+<section id="c1" class="chapitre">
   <h2>Chapitre 1. Avant la naissance de l’économie</h2>
+  <div class="volets">
+    <button type="button" class="ctrl" data-volet="cours" aria-pressed="true">Cours</button>
+    <button type="button" class="ctrl" data-volet="express" aria-pressed="false">Récap express</button>
+    <button type="button" class="ctrl" data-volet="dates" aria-pressed="false">Dates, histoire, œuvres</button>
+  </div>
+  <div class="volet cours">
   <article class="card">
     <p><strong>Quatre étapes.</strong> Antiquité et Moyen Âge. <span class="clef">XVe-XVIe</span>, École de Salamanque. <span class="clef">XVIe-XVIIe</span>, mercantilisme. <span class="clef">XVIIe-début XVIIIe</span>, physiocratie.</p>
     <div class="badges">
@@ -131,10 +144,37 @@ try {
   </div>
   <article class="piege"><strong>Ne pas confondre.</strong> Aristote condamne tout intérêt. Thomas le condamne parce que la monnaie se consomme en servant, donc on paierait deux fois. Salamanque n’interdit plus le prêt, seulement le taux excessif, et le législateur l’encadre. Les mercantilistes ne le condamnent plus : la monnaie est la richesse, et le commerce est un jeu à somme nulle.</article>
   </article>
+  </div>
+  <div class="volet express" hidden>
+    <article class="point">
+      <h3>Récap express</h3>
+      <p>L’économie n’est pas encore une science. Elle sert d’abord la morale. Platon condamne la propriété privée et regarde la société entière. Aristote la défend. La bonne chrématistique sert les besoins. La mauvaise fait de la monnaie une fin. L’usure est condamnée.</p>
+      <p>Thomas d’Aquin, Somme théologique, 1266-1273, pose le juste prix. Justice commutative : même valeur dans l’échange. Justice distributive : part selon la contribution. Une maison se loue, l’usage se sépare de la propriété. Un jus de fruit, comme la monnaie, se consomme en servant. Demander un intérêt, c’est faire payer deux fois. C’est contraire à la justice commutative. L’argument moral existe. Il n’est pas dominant.</p>
+      <p>Salamanque détache un peu l’économie de la morale. Martin de Azpilcueta, dit Navarro, 1492-1586, pas 1596, et le nom n’est pas Azpicuelta. Domingo de Soto, 1494-1560. La monnaie sert d’abord l’échange. Un profit modeste est admis. Les changeurs sont condamnés. Le prêt ne l’est plus. Seul le taux excessif reste l’usure, et la loi l’encadre.</p>
+      <p>Mercantilisme vient de mercante, marchand. L’or américain fait baisser la valeur de la monnaie : inflation. On retient Bodin, 1568. On n’apprend pas Malestroit en 1443. Colbert, 1619-1683, crée les manufactures d’État et les Compagnies des Indes. Il exporte et ferme les importations. Le commerce est un jeu à somme nulle. Douanes et corporations protègent.</p>
+      <p>Quesnay, 1694-1774, fait de la terre l’unique source des richesses. Tableau économique, 1758. Libéralisation du grain, 1764-1771. Propriétaires à la rente, classe productive qui crée, classe stérile qui transforme. Le circuit fait de la dépense des uns le revenu des autres. Limite : il néglige la classe qui deviendra l’industrie.</p>
+    </article>
+  </div>
+  <div class="volet dates" hidden>
+    <article class="point">
+      <h3>Dates</h3>
+      <p>1266-1273, Somme théologique. 1492-1586, Azpilcueta. 1494-1560, Soto. 1568, réponse de Bodin sur la cherté. 1619-1683, Colbert. 1758, Tableau économique. 1764-1771, libéralisation du grain. 1694-1774, Quesnay.</p>
+      <h3>Histoire</h3>
+      <p>Le commerce du XVe et du XVIe siècle détache l’économie de la morale. L’or américain du XVIe siècle fait l’inflation. Le siècle de Colbert est un siècle de guerres : le commerce y est un jeu à somme nulle. Les famines de l’Ancien Régime poussent à libérer le grain entre 1764 et 1771. Les Lumières font reculer le mercantilisme.</p>
+      <h3>Œuvres</h3>
+      <p>Somme théologique, Thomas d’Aquin, 1266-1273. Réponse de Bodin, 1568. Maximes de Quesnay, maxime III : la terre est l’unique source des richesses. Tableau économique, 1758.</p>
+    </article>
+  </div>
 </section>
 
-<section id="c2">
+<section id="c2" class="chapitre" hidden>
   <h2>Chapitre 2. Les classiques : épargne, croissance, économie réelle</h2>
+  <div class="volets">
+    <button type="button" class="ctrl" data-volet="cours" aria-pressed="true">Cours</button>
+    <button type="button" class="ctrl" data-volet="express" aria-pressed="false">Récap express</button>
+    <button type="button" class="ctrl" data-volet="dates" aria-pressed="false">Dates, histoire, œuvres</button>
+  </div>
+  <div class="volet cours">
   <article class="card">
     <p>Au Royaume-Uni, le commerce et les manufactures sont plus avancés. Les classiques critiquent Quesnay. Le courant naît au XVIIIe et culmine au XIXe. Quatre objets : la valeur fondée sur le travail, la répartition, l’évolution des richesses, le libre-échange. Croyance libérale, État peu présent. Risque d’<span class="clef">état stationnaire</span>, croissance nulle.</p>
   </article>
@@ -204,10 +244,36 @@ try {
   </div>
   <article class="piege"><strong>Ne pas confondre.</strong> Smith mesure parfois par le travail commandé, en société avancée. Ricardo maintient le travail incorporé pour les biens reproductibles. L’état stationnaire de Ricardo vient de la nature. Celui de Marx viendra du comportement des capitalistes.</article>
   </article>
+  </div>
+  <div class="volet express" hidden>
+    <article class="point">
+      <h3>Récap express</h3>
+      <p>Les classiques critiquent Quesnay. La richesse est réelle, pas monétaire. C’est la dichotomie. Smith, 1723-1790, l’écrit dans la Théorie des sentiments moraux, 1759, et la Richesse des nations, 1776.</p>
+      <p>En état primitif, pas de propriété, la valeur est le travail incorporé. En état avancé, le prix paie salaire, profit et rente : c’est le travail commandé. Cinquante chaises : 10 jours à 10 font 100 de travail. Profit 25, rente 25, prix 150. Incorporé : 10 journées. Commandé : 15.</p>
+      <p>Le prix de marché gravite vers le prix naturel, mot repris à Newton. Si Pm est au-dessus, des producteurs entrent. S’il est en dessous, ils sortent. La concurrence empêche le monopole. L’épargne du frugal devient capital. Le prodigue dépense plus que son revenu. La division du travail accélère la richesse, elle n’en est pas la cause. Il faut alors le libre-échange. La main invisible a deux entorses : plafond du crédit à 5 ou 6 % contre les projectors, et éducation publique du livre V, parce que la division du travail abrutit l’ouvrier.</p>
+      <p>Ricardo, 1772-1823, Principes, 1817, garde le travail incorporé pour les biens reproductibles. Les bas de coton additionnent culture, navire, filage, machines et détaillant. La rente se détermine à part. Tout ce qui augmente les salaires diminue les profits. La terre est rare, inégale, à rendements décroissants. Plus de population, plus de demande de blé, prix du blé en hausse, salaires en hausse, terres moins fertiles, profits vers zéro : état stationnaire naturel. Machines et libre-échange le retardent. Ils ne le suppriment pas. Aujourd’hui, le cours retient environ 60 % de salaires, 30 % de profits, 10 % d’impôts. Les Corn Laws et les avantages comparatifs sont un complément, pas une phrase du diaporama.</p>
+    </article>
+  </div>
+  <div class="volet dates" hidden>
+    <article class="point">
+      <h3>Dates</h3>
+      <p>1723-1790, Smith. 1759, Théorie des sentiments moraux. 1776, Richesse des nations. 5 à 6 %, plafond du crédit. 1772-1823, Ricardo. 1817, Principes. 60 %, 30 % et 10 %, parts actuelles citées pour la répartition.</p>
+      <h3>Histoire</h3>
+      <p>Le Royaume-Uni a déjà le commerce et les manufactures. Les classiques s’y opposent à Quesnay. La croyance est libérale, avec un État peu présent, et le risque d’une croissance qui s’arrête. Chez Ricardo, la menace est réelle mais très lointaine, et elle vient de la nature, pas des hommes.</p>
+      <h3>Œuvres</h3>
+      <p>Théorie des sentiments moraux, Smith, 1759. Richesse des nations, Smith, 1776, livre V pour l’école. Des principes de l’économie politique et de l’impôt, Ricardo, 1817. Citation de Keynes : Ricardo a conquis l’Angleterre comme l’Inquisition a conquis l’Espagne.</p>
+    </article>
+  </div>
 </section>
 
-<section id="c3">
+<section id="c3" class="chapitre" hidden>
   <h2>Chapitre 3. L’apogée du laisser-faire au XIXe siècle</h2>
+  <div class="volets">
+    <button type="button" class="ctrl" data-volet="cours" aria-pressed="true">Cours</button>
+    <button type="button" class="ctrl" data-volet="express" aria-pressed="false">Récap express</button>
+    <button type="button" class="ctrl" data-volet="dates" aria-pressed="false">Dates, histoire, œuvres</button>
+  </div>
+  <div class="volet cours">
   <article class="card">
     <p>Révolution industrielle en France : le marché est roi, l’État ne doit pas intervenir, le libre-échange est promu. Entreprises, banques, investissements, classe ouvrière. Naissance d’une pensée libérale.</p>
     <div class="badges">
@@ -248,10 +314,34 @@ try {
   <p><span class="clef">Première loi de Gossen, 1854</span> : l’intensité du besoin baisse à mesure qu’on le satisfait. L’utilité marginale décroît jusqu’à la satiété. La valeur dépend de l’utilité marginale, pas de l’utilité totale. <span class="clef">Deuxième loi de Gossen</span> : à l’équilibre, les prix relatifs de deux biens suivent le rapport de leurs utilités marginales. Le prix dépend donc des besoins et de la rareté. L’offre et la demande mènent à un équilibre général. C’est libéral. La valeur est subjective. Les classiques la voulaient objective, par le travail.</p>
   <article class="piege"><strong>Ne pas confondre.</strong> Say introduit l’utilité et les services. Il ne fait pas la théorie de l’utilité marginale. Ça, c’est Menger, Jevons, Gossen.</article>
   </article>
+  </div>
+  <div class="volet express" hidden>
+    <article class="point">
+      <h3>Récap express</h3>
+      <p>Au XIXe siècle, le marché est roi. Say, 1767-1832, Traité, 1803, craint le retour des corporations sous la Restauration, 1814-1830. Les manufactures privilégiées font un prix trop haut et bloquent l’innovation. L’État ne garde que la défense, la police, les routes et la propriété : État-gendarme. Il est plus smithien que Smith. Le prix vient de l’utilité, pas du coût. Loi des débouchés, 1803 : toute offre crée sa demande. Pas de crise durable, pas de chômage structurel.</p>
+      <p>Les marginalistes gardent le libéralisme et abandonnent la valeur-travail, l’état stationnaire et les classes. L’agent est un Homo oeconomicus. Jevons, 1835-1882, calcule en 1871 plaisirs et peines. Bentham, 1748-1832, donne quatre critères : intensité, durée, probabilité, proximité. Menger, 1840-1921, avec Walras, 1834-1910, et Gossen, 1810-1858, mesure l’utilité marginale. Le paradoxe de Smith : l’eau est utile et n’achète rien, le diamant sert peu et s’échange cher. Dans le désert : 0, 30, 55, 75, 90, 100, 105, 105, puis 98. Marges : 0, 30, 25, 20, 15, 10, 5, 0, puis −7. Première loi de Gossen, 1854 : la marge décroît. La valeur suit la marge, pas le total. Deuxième loi : les prix relatifs suivent le rapport des marges.</p>
+    </article>
+  </div>
+  <div class="volet dates" hidden>
+    <article class="point">
+      <h3>Dates</h3>
+      <p>1767-1832, Say. 1803, Traité et loi des débouchés. 1814-1830, Restauration. 1841, citation sur les règlements de Paris. 1748-1832, Bentham. 1835-1882, Jevons. 1871, calcul des plaisirs. 1840-1921, Menger. 1834-1910, Walras. 1810-1858, Gossen. 1854, lois de Gossen. 1776, paradoxe de l’eau et du diamant.</p>
+      <h3>Histoire</h3>
+      <p>Révolution industrielle : libéralisation, entreprises, banques, classe ouvrière. La Restauration fait craindre le retour des corporations et des privilèges royaux. Les marginalistes passent des classes aux individus, sans plus poser l’état stationnaire.</p>
+      <h3>Œuvres</h3>
+      <p>Traité d’économie politique, Say, 1803. Citation de 1841 sur les vexations des règlements. Jevons, 1871 : maximiser le plaisir au moindre effort. Lois de Gossen, 1854. Tableau des huit verres, diaporama de Menger.</p>
+    </article>
+  </div>
 </section>
 
-<section id="c4">
+<section id="c4" class="chapitre" hidden>
   <h2>Chapitre 4. Karl Marx, <span class="clef">1818-1883</span></h2>
+  <div class="volets">
+    <button type="button" class="ctrl" data-volet="cours" aria-pressed="true">Cours</button>
+    <button type="button" class="ctrl" data-volet="express" aria-pressed="false">Récap express</button>
+    <button type="button" class="ctrl" data-volet="dates" aria-pressed="false">Dates, histoire, œuvres</button>
+  </div>
+  <div class="volet cours">
   <article class="card">
     <p>Économiste, philosophe, sociologue, historien. Droit en Allemagne, puis histoire, philosophie, économie. L’histoire est une lutte entre oppresseurs et opprimés, jusqu’à la révolte. Il reprend les questions classiques : valeur, travail, richesses, état stationnaire. Œuvre centrale : <span class="clef">Le Capital, 1867</span>.</p>
     <p><strong>Fil rouge.</strong> Dernier des classiques par la valeur-travail, premier grand hétérodoxe parce qu’il rompt la dichotomie et fait de la crise un produit du capitalisme.</p>
@@ -288,10 +378,35 @@ try {
   <p>Limites du cours. La paupérisation annoncée n’a pas eu cette forme au XXe siècle : l’<span class="clef">État-providence</span> l’a empêchée. Et les travailleurs ne souhaitent pas forcément la destruction du capitalisme. Marx est en position charnière : apogée du modèle classique, et premier hétérodoxe avec un modèle achevé. Hétérodoxe s’oppose à l’orthodoxie, la théorie dominante, classique puis néoclassique.</p>
   <article class="piege"><strong>Ne pas confondre.</strong> Même mot, état stationnaire. Ricardo : la nature. Marx : les capitalistes remplacent le travail vivant par du capital constant, et le taux Pv/(c+v) baisse.</article>
   </article>
+  </div>
+  <div class="volet express" hidden>
+    <article class="point">
+      <h3>Récap express</h3>
+      <p>Marx, 1818-1883, Le Capital, 1867, reprend la valeur-travail et le travail comme marchandise. Il rompt la dichotomie : la monnaie est au cœur du capitalisme. Crises et chômage lui sont internes. C’est une critique du marché, et le premier grand modèle hétérodoxe.</p>
+      <p>Le travail concret est privé : 10 heures, 15 heures, 17 heures pour une chaise. On n’achète pas la plus coûteuse. La valeur vient du travail abstrait, la moyenne socialement nécessaire. La circulation simple, M − A − M', n’enrichit personne. La circulation du capital, A − M − A', fait A' supérieur à A. Plus-value = A' − A. Elle vient de la force de travail. Absolue : plus d’heures. Relative : plus de productivité. Elle va au capitaliste. C’est l’exploitation et l’aliénation.</p>
+      <p>Trois lois. La composition organique x = c/v, pas c/d. c est le capital mort, v le travail vivant. Elle monte. Le taux de profit est Pv/(c+v). Il baisse parce que les capitalistes substituent des machines aux ouvriers, la demande ne suit pas, la plus-value est comprimée. Le progrès technique et la baisse des salaires retardent. À long terme, profit vers zéro. Troisième loi : paupérisation, armée de réserve, luttes, crise. Au XXe siècle, l’État-providence empêche cette paupérisation, et les travailleurs ne veulent pas forcément détruire le capitalisme.</p>
+    </article>
+  </div>
+  <div class="volet dates" hidden>
+    <article class="point">
+      <h3>Dates</h3>
+      <p>1818-1883, Marx. 1867, Le Capital. Trois chaises : 10 h, 15 h, 17 h. Formules : M − A − M', A − M − A', Pv = A' − A, x = c/v, taux = Pv/(c+v). XXe siècle, État-providence.</p>
+      <h3>Histoire</h3>
+      <p>Marx lit l’histoire comme une lutte entre oppresseurs et opprimés, jusqu’à la révolte. Le capitalisme n’est pas un équilibre naturel. La baisse du profit vient du comportement des capitalistes, pas de la terre. L’État-providence du XXe siècle limite la prévision de paupérisation.</p>
+      <h3>Œuvres</h3>
+      <p>Le Capital, 1867. Position charnière : dernier classique par la valeur-travail, premier hétérodoxe parce que la monnaie et la crise sont internes au système.</p>
+    </article>
+  </div>
 </section>
 
-<section id="c5">
+<section id="c5" class="chapitre" hidden>
   <h2>Chapitre 5. Joseph Schumpeter, <span class="clef">1883-1950</span></h2>
+  <div class="volets">
+    <button type="button" class="ctrl" data-volet="cours" aria-pressed="true">Cours</button>
+    <button type="button" class="ctrl" data-volet="express" aria-pressed="false">Récap express</button>
+    <button type="button" class="ctrl" data-volet="dates" aria-pressed="false">Dates, histoire, œuvres</button>
+  </div>
+  <div class="volet cours">
   <article class="card">
     <p>Il connaît la théorie néoclassique et celle de Marx. Il est à la frontière de l’orthodoxie et de l’hétérodoxie. Il explique la dynamique du capitalisme par l’entrepreneur qui innove, et sort ainsi de la morosité. Le financement vient des banques. Il n’y a pas de dichotomie réel / monétaire.</p>
     <div class="badges">
@@ -321,6 +436,25 @@ try {
   <p>On ne sait pas quand la prochaine innovation paraîtra. L’innovateur n’a pas les fonds. Le capitaliste et surtout la banque les apportent. La banque crée de la monnaie, finance les nouvelles combinaisons, et sélectionne les projets. Deux rôles, donc. Schumpeter appelle le banquier l’<span class="clef">éphore</span> du capitalisme. Sans lui, pas de financement, donc pas d’innovation. C’est l’opposé des classiques et des néoclassiques, pour qui la monnaie ne fait pas la dynamique réelle.</p>
   <article class="piege"><strong>Ne pas confondre.</strong> Smith se méfie du projector. Say organise des services productifs. Schumpeter innove, casse la routine, et dépend du banquier. Les notes écrivent Shumpeter : l’orthographe du contrôle est <span class="clef">Schumpeter</span>.</article>
   </article>
+  </div>
+  <div class="volet express" hidden>
+    <article class="point">
+      <h3>Récap express</h3>
+      <p>Schumpeter, 1883-1950, connaît les néoclassiques et Marx. Il est à la frontière. Il n’y a pas de dichotomie : sans monnaie bancaire, pas d’innovation. Théorie de l’évolution économique, 1911. Capitalisme, socialisme et démocratie, 1942.</p>
+      <p>Smith oppose projector et homme prudent. Say combine travail et capital. Schumpeter organise aussi, mais par des combinaisons nouvelles. Il rejette l’Homo oeconomicus. L’innovateur a une vision, une intuition, des motifs matériels et immatériels. Le profit est secondaire. La croissance est une hausse de richesse. Le développement change la société : industrie, déclin agricole, exode. L’innovation majeure détruit l’ancien système et des emplois. Les mineures l’améliorent. Cycle : monopole, essaim et concurrence, ralentissement, crise, nouvelle rupture. Sans innovateur, routine et état stationnaire. On ne sait pas quand la suivante arrive.</p>
+      <p>L’innovateur n’a pas les fonds. La banque crée la monnaie, finance et sélectionne. Le banquier est l’éphore du capitalisme. Sans lui, pas d’innovation. C’est l’inverse des classiques, pour qui la monnaie ne fait pas la dynamique réelle.</p>
+    </article>
+  </div>
+  <div class="volet dates" hidden>
+    <article class="point">
+      <h3>Dates</h3>
+      <p>1883-1950, Schumpeter. 1911, Théorie de l’évolution économique. 1942, Capitalisme, socialisme et démocratie.</p>
+      <h3>Histoire</h3>
+      <p>Il écrit après les classiques, les marginalistes et Marx. La croissance capitaliste n’est pas un équilibre continu. Elle est cyclique, discontinue, et dépend du crédit. Le mot éphore vient du contrôleur spartiate : le banquier surveille et choisit les innovations.</p>
+      <h3>Œuvres</h3>
+      <p>Théorie de l’évolution économique, 1911. Capitalisme, socialisme et démocratie, 1942. Formule du cours : le banquier est l’éphore de l’économie capitaliste.</p>
+    </article>
+  </div>
 </section>
 </main>
 <script>
@@ -438,6 +572,54 @@ document.getElementById('cycle').addEventListener('click', function (e) {
   b.classList.add('on');
   document.getElementById('cycle-txt').textContent = b.textContent + '. Sans innovateur, uniquement des entrepreneurs routiniers : gains de productivité faibles, état stationnaire de routine.';
 });
+
+var chapIds = ['c1', 'c2', 'c3', 'c4', 'c5'];
+function showChap(id) {
+  if (chapIds.indexOf(id) < 0) id = 'c1';
+  chapIds.forEach(function (cid) {
+    var sec = document.getElementById(cid);
+    var on = cid === id;
+    sec.hidden = !on;
+  });
+  document.querySelectorAll('[data-chap]').forEach(function (b) {
+    b.setAttribute('aria-pressed', b.getAttribute('data-chap') === id ? 'true' : 'false');
+  });
+  try { localStorage.setItem('hpe-chap', id); } catch (e) {}
+  var name = 'cours';
+  try { name = localStorage.getItem('hpe-volet') || 'cours'; } catch (e) {}
+  showVolet(document.getElementById(id), name);
+}
+function showVolet(sec, name) {
+  if (name !== 'express' && name !== 'dates') name = 'cours';
+  sec.querySelectorAll('.volet').forEach(function (v) {
+    v.hidden = !v.classList.contains(name);
+  });
+  sec.querySelectorAll('[data-volet]').forEach(function (b) {
+    b.setAttribute('aria-pressed', b.getAttribute('data-volet') === name ? 'true' : 'false');
+  });
+  try { localStorage.setItem('hpe-volet', name); } catch (e) {}
+}
+document.getElementById('chap-switch').addEventListener('click', function (e) {
+  var b = e.target.closest('[data-chap]');
+  if (!b) return;
+  showChap(b.getAttribute('data-chap'));
+});
+document.querySelector('.jump').addEventListener('click', function (e) {
+  var a = e.target.closest('a[href^="#c"]');
+  if (!a) return;
+  e.preventDefault();
+  showChap(a.getAttribute('href').slice(1));
+});
+document.body.addEventListener('click', function (e) {
+  var b = e.target.closest('.volets [data-volet]');
+  if (!b) return;
+  showVolet(b.closest('section'), b.getAttribute('data-volet'));
+});
+var start = 'c1';
+try {
+  start = localStorage.getItem('hpe-chap') || 'c1';
+} catch (e) {}
+showChap(start);
 </script>
 </body>
 </html>
